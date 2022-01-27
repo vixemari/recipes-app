@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState({ disableButton: true });
   const [user, setUser] = useState({ email: '', password: '' });
-
+  const [redirect, setRedirect] = useState({ canRedirect: false });
   function validateEmail(email) {
     const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
@@ -30,6 +31,8 @@ function Login() {
     const TOKEN = 1;
     localStorage.setItem('mealsToken', JSON.stringify(TOKEN));
     localStorage.setItem('cocktailsToken', JSON.stringify(TOKEN));
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
+    setRedirect({ canRedirect: true });
   }
 
   return (
@@ -57,6 +60,7 @@ function Login() {
       >
         Enter
       </button>
+      { redirect.canRedirect && <Redirect to="/foods" />}
     </form>
   );
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from '../pages/Login';
+import Foods from '../pages/Foods';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      {/* <Route exact path="/foods" component={ Login } />
-      <Route exact path="/drinks" component={ Login } />
+      <Route exact path="/foods" component={ Foods } />
+      {/* <Route exact path="/drinks" component={ Login } />
       <Route exact path={ `/foods/${iddareceit}` } component={ Login } />
       <Route exact path={ `/drinks/${iddareceita}` } component={ Login } />
       <Route exact path={ `/food/${iddareceita}/in-progress` } component={ Login } />
