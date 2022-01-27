@@ -19,14 +19,17 @@ function Login() {
     }
   }
 
-  // useEffect(() => {
-  //   enableButton();
-  // }, [user.email, user.password]);
-
   function handleChange({ target }) {
     const { name, value } = target;
     setUser({ ...user, [name]: value });
     enableButton();
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    const TOKEN = 1;
+    localStorage.setItem('mealsToken', JSON.stringify(TOKEN));
+    localStorage.setItem('cocktailsToken', JSON.stringify(TOKEN));
   }
 
   return (
@@ -50,6 +53,7 @@ function Login() {
         type="submit"
         data-testid="login-submit-btn"
         disabled={ isDisabled.disableButton }
+        onClick={ handleClick }
       >
         Enter
       </button>
