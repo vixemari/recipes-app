@@ -1,8 +1,13 @@
 import React from 'react';
+import IndexFooter from '../components/footer/IndexFooter';
 
 function Foods() {
   return (
-    <div>FOODS</div>
+    <div>
+      FOODS
+      <IndexFooter />
+
+    </div>
   );
 }
 
