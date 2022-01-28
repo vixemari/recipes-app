@@ -12,6 +12,8 @@ import ExploreNationalities from '../pages/ExploreNationalities';
 import Profile from '../pages/Profile';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+import DetailsRecipeFood from '../pages/DetailsRecipeFood';
+import DetailsRecipeDrink from '../pages/DetailsRecipeDrink';
 
 function Routes() {
   return (
@@ -40,12 +42,13 @@ function Routes() {
       <Route exact path="/profile" component={ Profile } />
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route exact path={ `/foods/${idDaReceita}` } component={ DetailsRecipeFood } />
+      <Route exact path={ `/drinks/${idDaReceita}` } component={ DetailsRecipeDrink } />
 
-      {/* <Route exact path={ `/foods/${iddareceit}` } component={ Login } />
-      <Route exact path={ `/drinks/${iddareceita}` } component={ Login } />
+      {/*
       <Route exact path={ `/food/${iddareceita}/in-progress` } component={ Login } />
       <Route exact path={ `/drink/${iddareceita}/in-progress` } component={ Login } />
-*/}
+      */}
     </Switch>
   );
 }
