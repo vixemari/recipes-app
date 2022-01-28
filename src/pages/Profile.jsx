@@ -26,9 +26,6 @@ function Profile() {
 
   function handleClickLogout() {
     localStorage.clear();
-    // localStorage.setItem('mealsToken', JSON.stringify([]));
-    // localStorage.setItem('cocktailsToken', JSON.stringify([]));
-    // localStorage.setItem('user', JSON.stringify({}));
     setRedirect({ ...redirect, canRedirectToLogin: true });
   }
 
