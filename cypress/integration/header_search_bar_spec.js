@@ -18,7 +18,7 @@ describe('13 - Implemente os elementos da barra de busca respeitando os atributo
   });
 });
 
-describe.only('14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingredient, Name e First letter', () => {
+describe('14 - Posicione a barra logo abaixo do header e implemente 3 radio buttons: Ingredient, Name e First letter', () => {
   it('Se o radio selecionado for Ingredient, a busca na API é feita corretamente pelo ingrediente', () => {
     cy.visit('http://localhost:3000/foods', {
       onBeforeLoad(win) {
