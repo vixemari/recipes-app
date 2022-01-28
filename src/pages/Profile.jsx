@@ -57,7 +57,7 @@ function Profile() {
       >
         Logout
       </button>
-       <IndexFooter />
+      <IndexFooter />
       {redirect.canRedirectToDones && <Redirect to="/done-recipes" />}
       {redirect.canRedirectToFavorite && <Redirect to="/favorite-recipes" />}
       {redirect.canRedirectToLogin && <Redirect to="/" />}
