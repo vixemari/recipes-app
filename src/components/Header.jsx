@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import profileImg from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBarHeader from './SearchBarHeader';
 
 function Header({ title, btnSearch }) {
   return (
@@ -23,6 +24,7 @@ function Header({ title, btnSearch }) {
           />
         )
       }
+      <SearchBarHeader />
     </div>
   );
 }
