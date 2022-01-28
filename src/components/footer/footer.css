@@ -1,10 +1,9 @@
 .fixedFooter {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: grey;
-    color: white;
-    text-align: center;
-    
-  }
+  background-color: grey;
+  bottom: 0;
+  color: white;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}

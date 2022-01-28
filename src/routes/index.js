@@ -13,7 +13,6 @@ import Profile from '../pages/Profile';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 
-// alteraçao pra PR
 function Routes() {
   return (
     <Switch>
