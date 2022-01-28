@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import IndexFooter from '../components/footer/IndexFooter';
 
 function Profile() {
   const [emailLocal, setEmailLocal] = useState('');
@@ -56,7 +57,7 @@ function Profile() {
       >
         Logout
       </button>
-
+       <IndexFooter />
       {redirect.canRedirectToDones && <Redirect to="/done-recipes" />}
       {redirect.canRedirectToFavorite && <Redirect to="/favorite-recipes" />}
       {redirect.canRedirectToLogin && <Redirect to="/" />}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import IndexFooter from '../components/footer/IndexFooter';
 
 function Explore() {
   const [redirect, setRedirect] = useState({ canRedirectToExploreFoods: false,
@@ -33,6 +34,7 @@ function Explore() {
       >
         Explore Drinks
       </button>
+      <IndexFooter />
       {redirect.canRedirectToExploreFoods && <Redirect to="/explore/foods" />}
       {redirect.canRedirectToExploreDrinks && <Redirect to="/explore/drinks" />}
     </div>
