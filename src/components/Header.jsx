@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import profileImg from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBarHeader from './SearchBarHeader';
 
 function Header({ title, btnSearch }) {
   const [redirectToProfile, setRedirectToProfile] = useState({ canRedirect: false });
-
-  function handleClick() {
+  const [openFilters, setOpenFilters] = useState({ canOpenFilters: false });
+  function handleClickProfile() {
     setRedirectToProfile({ canRedirect: true });
+  }
+
+  function handleClickSearch() {
+    setOpenFilters({ canOpenFilters: true });
   }
 
   return (
@@ -18,7 +23,7 @@ function Header({ title, btnSearch }) {
         src={ profileImg }
         type="button"
         data-testid="profile-top-btn"
-        onClick={ handleClick }
+        onClick={ handleClickProfile }
       />
       <h1 data-testid="page-title">{title}</h1>
       {
@@ -28,10 +33,12 @@ function Header({ title, btnSearch }) {
             src={ searchIcon }
             type="button"
             data-testid="search-top-btn"
+            onClick={ handleClickSearch }
           />
         )
       }
       { redirectToProfile.canRedirect && <Redirect to="/profile" />}
+      { openFilters.canOpenFilters && <SearchBarHeader /> }
     </div>
   );
 }
