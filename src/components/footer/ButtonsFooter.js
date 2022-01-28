@@ -20,7 +20,7 @@ export default function ButtonsFooter() {
       </Button>
       {' '}
       <Button
-        onClick={ () => history.push('/explore"') }
+        onClick={ () => history.push('/explore') }
         src={ exploreIcon }
         data-testid="explore-bottom-btn"
         variant="outline-primary"
