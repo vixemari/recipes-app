@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import profileImg from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title, btnSearch }) {
+  const [redirectToProfile, setRedirectToProfile] = useState({ canRedirect: false });
+
+  function handleClick() {
+    setRedirectToProfile({ canRedirect: true });
+  }
+
   return (
     <div>
       <button
@@ -11,6 +18,7 @@ function Header({ title, btnSearch }) {
         src={ profileImg }
         type="button"
         data-testid="profile-top-btn"
+        onClick={ handleClick }
       />
       <h1 data-testid="page-title">{title}</h1>
       {
@@ -23,6 +31,7 @@ function Header({ title, btnSearch }) {
           />
         )
       }
+      { redirectToProfile.canRedirect && <Redirect to="/profile" />}
     </div>
   );
 }
