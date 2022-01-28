@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import Foods from '../pages/Foods';
 
+// alteraçao pra PR
 function Routes() {
   return (
     <Switch>
