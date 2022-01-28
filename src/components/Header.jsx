@@ -37,6 +37,7 @@ function Header({ title, btnSearch }) {
           />
         )
       }
+      <SearchBarHeader />
       { redirectToProfile.canRedirect && <Redirect to="/profile" />}
       { openFilters.canOpenFilters && <SearchBarHeader /> }
     </div>
