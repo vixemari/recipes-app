@@ -5,7 +5,8 @@ import Header from '../components/Header';
 function Profile() {
   const [emailLocal, setEmailLocal] = useState('');
   const [redirect, setRedirect] = useState({ canRedirectToFavorite: false,
-    canRedirectToDones: false });
+    canRedirectToDones: false,
+    canRedirectToLogin: false });
 
   const PROFILE = 'Profile';
 
@@ -21,6 +22,14 @@ function Profile() {
 
   function handleClickDones() {
     setRedirect({ ...redirect, canRedirectToDones: true });
+  }
+
+  function handleClickLogout() {
+    localStorage.clear();
+    // localStorage.setItem('mealsToken', JSON.stringify([]));
+    // localStorage.setItem('cocktailsToken', JSON.stringify([]));
+    // localStorage.setItem('user', JSON.stringify({}));
+    setRedirect({ ...redirect, canRedirectToLogin: true });
   }
 
   return (
@@ -43,9 +52,17 @@ function Profile() {
         Favorite Recipes
       </button>
 
-      <button type="button" data-testid="profile-logout-btn">Logout</button>
+      <button
+        type="button"
+        data-testid="profile-logout-btn"
+        onClick={ handleClickLogout }
+      >
+        Logout
+      </button>
+
       {redirect.canRedirectToDones && <Redirect to="/done-recipes" />}
       {redirect.canRedirectToFavorite && <Redirect to="/favorite-recipes" />}
+      {redirect.canRedirectToLogin && <Redirect to="/" />}
     </div>
   );
 }
