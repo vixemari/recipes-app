@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
+import { getDrinks, getMeals, getFoodCategories,
+  getDrinksCategories } from '../service/fetchApi';
 import { getDrinks, getMeals } from '../service/fetchApi';
 
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [recipesCategory, setRecipesCategory] = useState([]);
+  const [drinkCategory, setDrinkCategory] = useState([]);
+
+
   const contextValue = {
     recipes,
     setRecipes,
     drinks,
     setDrinks,
+    recipesCategory,
+    setRecipesCategory,
+    drinkCategory,
+    setDrinkCategory,
+
   };
   useEffect(() => {
     async function inicialRecipes() {
@@ -21,6 +32,17 @@ function Provider({ children }) {
     }
     inicialRecipes();
   }, []);
+
+  useEffect(() => {
+    async function inicialCategory() {
+      const categoryFoodResult = await getFoodCategories();
+      const categoryDrinksResult = await getDrinksCategories();
+      setRecipesCategory(categoryFoodResult);
+      setDrinkCategory(categoryDrinksResult);
+    }
+    inicialCategory();
+  }, []);
+
 
   return (
     <Context.Provider value={ contextValue }>
