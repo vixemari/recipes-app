@@ -6,6 +6,7 @@ import RecipesCard from '../components/RecipesCard';
 
 function Foods() {
   const FOOD = 'Foods';
+
   return (
     <div>
       <Header title={ FOOD } btnSearch />
