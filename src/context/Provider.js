@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 import { getDrinks, getMeals, getFoodCategories,
   getDrinksCategories } from '../service/fetchApi';
-import { getDrinks, getMeals } from '../service/fetchApi';
 
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [recipesCategory, setRecipesCategory] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
-
 
   const contextValue = {
     recipes,
@@ -42,7 +40,6 @@ function Provider({ children }) {
     }
     inicialCategory();
   }, []);
-
 
   return (
     <Context.Provider value={ contextValue }>

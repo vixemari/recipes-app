@@ -13,7 +13,8 @@ function Header({ title, btnSearch }) {
   }
 
   function handleClickSearch() {
-    setOpenFilters({ canOpenFilters: true });
+    setOpenFilters(({ canOpenFilters }) => (
+      { canOpenFilters: !canOpenFilters }));
   }
 
   return (
@@ -24,7 +25,10 @@ function Header({ title, btnSearch }) {
         type="button"
         data-testid="profile-top-btn"
         onClick={ handleClickProfile }
-      />
+      >
+        <img src={ profileImg } alt="profile-btn" />
+      </button>
+
       <h1 data-testid="page-title">{title}</h1>
       {
         btnSearch && (
@@ -34,10 +38,11 @@ function Header({ title, btnSearch }) {
             type="button"
             data-testid="search-top-btn"
             onClick={ handleClickSearch }
-          />
+          >
+            <img src={ searchIcon } alt="profile-btn" />
+          </button>
         )
       }
-      <SearchBarHeader />
       { redirectToProfile.canRedirect && <Redirect to="/profile" />}
       { openFilters.canOpenFilters && <SearchBarHeader /> }
     </div>
