@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import IndexFooter from '../components/footer/IndexFooter';
@@ -11,10 +11,18 @@ function Profile() {
 
   const PROFILE = 'Profile';
 
-  useEffect(() => {
+  function getEmail() {
     const user = JSON.parse(localStorage.getItem('user'));
     const { email } = user;
     setEmailLocal(email);
+  }
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user === null) {
+      localStorage.setItem('user', JSON.stringify({ email: 'email@email.com' }));
+    }
+    getEmail();
   }, []);
 
   function handleClickFavorites() {
