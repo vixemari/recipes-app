@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useParams } from 'react-router-dom';
 
 function DetailsRecipeFood() {
   useEffect(() => {
     // const { id } = match.params;
   }, []);
-
+  const history = useHistory();
+  const { id } = useParams();
   return (
     <div>
       <img src="" alt="recipeDetails" data-testid="recipe-photo" />
@@ -17,7 +19,15 @@ function DetailsRecipeFood() {
       <p data-testid="instructions">Instruções</p>
       {/* Aqui fica o video do you tube requisito 33 */}
       {/* Aqui fica o card de receitas recomendandas requisito 33 */}
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <button
+        type="button"
+        // talvez aki seja foods
+        onClick={ () => history.push(`/foods/${id}/in-progress`) }
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+
+      </button>
     </div>
   );
 }
