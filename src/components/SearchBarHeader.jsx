@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
-  fetchSearchBarHeaderIgredient,
-  fetchSearchBarHeaderName,
-  fetchSearchBarHeaderFirstLetter,
+  fetchSearchBarFoodsIgredient,
+  fetchSearchBarFoodsName,
+  fetchSearchBarFoodsFirstLetter,
+  fetchSearchBarDrinksIngredient,
+  fetchSearchBarDrinksName,
+  fetchSearchBarDrinksFirstLetter,
 } from '../service/fetchApi';
 
 function SearchBarHeader() {
+  // location para pegar a rota
+  const location = useLocation();
+
   // valores dos radios
-  const valueIngredient = 'ingredient';
   const valueName = 'name';
+  const valueIngredient = 'ingredient';
   const valueFirstLetter = 'firstLetter';
 
   // declaração dos states
@@ -28,15 +35,37 @@ function SearchBarHeader() {
   const firstLetterToUpperCase = (str) => str[0].toUpperCase() + str.substring(1);
 
   // função do click, faz a requisição da API
-  const onHandleClick = () => {
+  const getFoodFilter = () => {
+  // const onHandleClick = () => {
     if (radioSelectedState === 'ingredient') {
-      fetchSearchBarHeaderIgredient(inputSearchState);
+      fetchSearchBarFoodsIgredient(inputSearchState);
     }
     if (radioSelectedState === 'name') {
-      fetchSearchBarHeaderName(inputSearchState);
+      fetchSearchBarFoodsName(inputSearchState);
     }
     if (radioSelectedState === 'firstLetter') {
-      fetchSearchBarHeaderFirstLetter(inputSearchState);
+      fetchSearchBarFoodsFirstLetter(inputSearchState);
+    }
+  };
+
+  const getDrinksFilter = () => {
+    console.log('hei');
+    if (radioSelectedState === 'ingredient') {
+      fetchSearchBarDrinksIngredient(inputSearchState);
+    }
+    if (radioSelectedState === 'name') {
+      fetchSearchBarDrinksName(inputSearchState);
+    }
+    if (radioSelectedState === 'firstLetter') {
+      fetchSearchBarDrinksFirstLetter(inputSearchState);
+    }
+  };
+
+  const onHandleClick = () => {
+    if (location.pathname === '/foods') {
+      getFoodFilter();
+    } else {
+      getDrinksFilter();
     }
   };
 
@@ -82,9 +111,4 @@ function SearchBarHeader() {
   );
 }
 
-// InputHeader.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   btnSearch: PropTypes.bool.isRequired,
-// };
-//
 export default SearchBarHeader;

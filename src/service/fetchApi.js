@@ -21,21 +21,22 @@ export async function getDrinksCategories() {
   return data.drinks;
 }
 
-export const fetchSearchBarHeaderIgredient = async (ingredient) => {
+// endpoints do food
+export async function fetchSearchBarFoodsIgredient(ingredient) {
   const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const response = await fetch(url);
   const dataIngredient = await response.json();
   console.log(dataIngredient);
-};
+}
 
-export const fetchSearchBarHeaderName = async (name) => {
+export async function fetchSearchBarFoodsName(name) {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(url);
   const dataName = await response.json();
   console.log(dataName);
-};
+}
 
-export const fetchSearchBarHeaderFirstLetter = async (firstLetter) => {
+export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
   if (firstLetter.length > 1) {
     global.alert('Your search must have only 1 (one) character');
   } else {
@@ -44,4 +45,30 @@ export const fetchSearchBarHeaderFirstLetter = async (firstLetter) => {
     const dataFirstLetter = await response.json();
     console.log(dataFirstLetter);
   }
-};
+}
+
+// endpoints dos drinks
+export async function fetchSearchBarDrinksIngredient(ingredient) {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const response = await fetch(url);
+  const dataIngredient = await response.json();
+  console.log(dataIngredient);
+}
+
+export async function fetchSearchBarDrinksName(name) {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
+  const response = await fetch(url);
+  const dataName = await response.json();
+  console.log(dataName);
+}
+
+export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
+  if (firstLetter.length > 1) {
+    global.alert('Your search must have only 1 (one) character');
+  } else {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`;
+    const response = await fetch(url);
+    const dataFirstLetter = await response.json();
+    console.log(dataFirstLetter);
+  }
+}
