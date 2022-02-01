@@ -57,10 +57,11 @@ function SearchBarHeader() {
     if (radioSelectedState === 'firstLetter') {
       response = await fetchSearchBarFoodsFirstLetter(inputSearchState);
     }
-    if (response.meals.length === 1) {
+    if (response && response.meals !== null && response.meals.length === 1) {
       const { idMeal } = response.meals[0];
       redirectToFood(idMeal);
     }
+    // console.log(response);
   };
 
   const getDrinksFilter = async () => {
@@ -74,7 +75,7 @@ function SearchBarHeader() {
     if (radioSelectedState === 'firstLetter') {
       response = await fetchSearchBarDrinksFirstLetter(inputSearchState);
     }
-    if (response.drinks.length === 1) {
+    if (response && response.drinks !== null && response.drinks.length === 1) {
       const { idDrink } = response.drinks[0];
       redirectToDrink(idDrink);
     }
