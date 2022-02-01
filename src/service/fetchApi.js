@@ -45,3 +45,9 @@ export const fetchSearchBarHeaderFirstLetter = async (firstLetter) => {
     console.log(dataFirstLetter);
   }
 };
+
+export const filter = async (api) => {
+  const result = await fetch(api);
+  const data = await result.json();
+  return data;
+};
