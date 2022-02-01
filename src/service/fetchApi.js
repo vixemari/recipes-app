@@ -26,14 +26,16 @@ export async function fetchSearchBarFoodsIgredient(ingredient) {
   const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const response = await fetch(url);
   const dataIngredient = await response.json();
-  console.log(dataIngredient);
+  // console.log(dataIngredient);
+  return dataIngredient;
 }
 
 export async function fetchSearchBarFoodsName(name) {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(url);
   const dataName = await response.json();
-  console.log(dataName);
+  // console.log(dataName);
+  return dataName;
 }
 
 export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
@@ -43,7 +45,8 @@ export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`;
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
-    console.log(dataFirstLetter);
+    // console.log(dataFirstLetter);
+    return dataFirstLetter;
   }
 }
 
@@ -52,14 +55,16 @@ export async function fetchSearchBarDrinksIngredient(ingredient) {
   const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const response = await fetch(url);
   const dataIngredient = await response.json();
-  console.log(dataIngredient);
+  // console.log(dataIngredient);
+  return dataIngredient;
 }
 
 export async function fetchSearchBarDrinksName(name) {
   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(url);
   const dataName = await response.json();
-  console.log(dataName);
+  // console.log(dataName);
+  return dataName;
 }
 
 export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
@@ -69,6 +74,7 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`;
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
-    console.log(dataFirstLetter);
+    // console.log(dataFirstLetter);
+    return dataFirstLetter;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
   fetchSearchBarFoodsIgredient,
   fetchSearchBarFoodsName,
@@ -10,8 +10,9 @@ import {
 } from '../service/fetchApi';
 
 function SearchBarHeader() {
-  // location para pegar a rota
+  // location para pegar as rotas
   const location = useLocation();
+  const history = useHistory();
 
   // valores dos radios
   const valueName = 'name';
@@ -34,30 +35,48 @@ function SearchBarHeader() {
   // função pra deixar a primeira letra maiúscula de cada radio
   const firstLetterToUpperCase = (str) => str[0].toUpperCase() + str.substring(1);
 
+  // funções que redireciona para a página caso haja apenas uma receita
+  const redirectToFood = (id) => {
+    history.push(`/foods/${id}`);
+  };
+
+  const redirectToDrink = (id) => {
+    history.push(`/drinks/${id}`);
+  };
+
   // função do click, faz a requisição da API
-  const getFoodFilter = () => {
+  const getFoodFilter = async () => {
   // const onHandleClick = () => {
+    let response;
     if (radioSelectedState === 'ingredient') {
-      fetchSearchBarFoodsIgredient(inputSearchState);
+      response = await fetchSearchBarFoodsIgredient(inputSearchState);
     }
     if (radioSelectedState === 'name') {
-      fetchSearchBarFoodsName(inputSearchState);
+      response = await fetchSearchBarFoodsName(inputSearchState);
     }
     if (radioSelectedState === 'firstLetter') {
-      fetchSearchBarFoodsFirstLetter(inputSearchState);
+      response = await fetchSearchBarFoodsFirstLetter(inputSearchState);
+    }
+    if (response.meals.length === 1) {
+      const { idMeal } = response.meals[0];
+      redirectToFood(idMeal);
     }
   };
 
-  const getDrinksFilter = () => {
-    console.log('hei');
+  const getDrinksFilter = async () => {
+    let response;
     if (radioSelectedState === 'ingredient') {
-      fetchSearchBarDrinksIngredient(inputSearchState);
+      response = await fetchSearchBarDrinksIngredient(inputSearchState);
     }
     if (radioSelectedState === 'name') {
-      fetchSearchBarDrinksName(inputSearchState);
+      response = await fetchSearchBarDrinksName(inputSearchState);
     }
     if (radioSelectedState === 'firstLetter') {
-      fetchSearchBarDrinksFirstLetter(inputSearchState);
+      response = await fetchSearchBarDrinksFirstLetter(inputSearchState);
+    }
+    if (response.drinks.length === 1) {
+      const { idDrink } = response.drinks[0];
+      redirectToDrink(idDrink);
     }
   };
 
