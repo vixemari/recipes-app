@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { getFoodById } from '../service/fetchApi';
+import shareIcon from '../images/shareIcon.svg';
 
 function DetailsRecipeFood({ match }) {
   const [food, setFood] = useState();
+  const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
 
   useEffect(() => {
     const { id } = match.params;
@@ -14,6 +17,16 @@ function DetailsRecipeFood({ match }) {
     }
     getFood();
   }, []);
+
+  const history = useHistory();
+  function handleClick() {
+    const { id } = match.params;
+    return history.push(`/foods/${id}/in-progress`);
+  }
+
+  function handleClickShare() {
+    setCopyLink({ isLinkCopied: true });
+  }
 
   if (food) {
     let id = 0;
@@ -28,7 +41,15 @@ function DetailsRecipeFood({ match }) {
           width="100px"
         />
         <h1 data-testid="recipe-title">{ food.strMeal }</h1>
-        <button type="button" data-testid="share-btn">Compartilhar</button>
+        <button
+          src={ shareIcon }
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleClickShare }
+        >
+          <img src={ shareIcon } alt="share icon" />
+        </button>
+        {copyLink.isLinkCopied && <p>Link copied!</p>}
         <button type="button" data-testid="favorite-btn">Favoritar</button>
         <p data-testid="recipe-category">{ food.strCategory }</p>
         {/* Aqui fica os ingredientes - requisito 33 */}
@@ -68,7 +89,13 @@ function DetailsRecipeFood({ match }) {
           allowFullScreen
         />
         {/* Aqui fica o card de receitas recomendandas requisito 33 */}
-        <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          Iniciar Receita
+        </button>
       </div>
     );
   }
