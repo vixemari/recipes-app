@@ -10,7 +10,6 @@ function Drinks() {
     <div>
       <Header title={ DRINKS } btnSearch />
       <DrinkCategory />
-      <Header title={ DRINKS } btnSearch />
       <CardsDrinks param="drink" />
       <IndexFooter />
     </div>

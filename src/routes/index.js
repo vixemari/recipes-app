@@ -43,7 +43,7 @@ function Routes() {
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
       {/* <Route exact path={ `/foods/${idDaReceita}` } component={ DetailsRecipeFood } />
-      <Route exact path={ `/drinks/${idDaReceita}` }
+      {<Route exact path={ `/drinks/${idDaReceita}` }
       component={ DetailsRecipeDrink } /> */}
 
       {/*
