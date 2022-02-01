@@ -13,7 +13,7 @@ import Profile from '../pages/Profile';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DetailsRecipeFood from '../pages/DetailsRecipeFood';
-// import DetailsRecipeDrink from '../pages/DetailsRecipeDrink';
+import DetailsRecipeDrink from '../pages/DetailsRecipeDrink';
 
 function Routes() {
   return (
@@ -43,8 +43,7 @@ function Routes() {
       <Route exact path="/done-recipes" component={ DoneRecipes } />
       <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route exact path="/foods/:id" component={ DetailsRecipeFood } />
-      {/* <Route exact path={ `/drinks/${idDaReceita}` }
-      component={ DetailsRecipeDrink } /> */}
+      <Route exact path="/drinks/:id" component={ DetailsRecipeDrink } />
 
       {/*
       <Route exact path={ `/food/${iddareceita}/in-progress` } component={ Login } />
