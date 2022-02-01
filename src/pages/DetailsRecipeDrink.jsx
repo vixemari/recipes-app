@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import Context from '../context/Context';
 import { getDrinksById } from '../service/fetchApi';
 
 function DetailsRecipeDrink({ match }) {
@@ -31,7 +30,7 @@ function DetailsRecipeDrink({ match }) {
         <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
         <button type="button" data-testid="share-btn">Compartilhar</button>
         <button type="button" data-testid="favorite-btn">Favoritar</button>
-        <p data-testid="recipe-category">{ drink.strCategory }</p>
+        <p data-testid="recipe-category">{ drink.strAlcoholic }</p>
         {/* Aqui fica os ingredientes - requisito 33 */}
         <ul>
           Ingredients:

@@ -9,7 +9,7 @@ function DetailsRecipeFood({ match }) {
     const { id } = match.params;
     async function getFood() {
       const foodResult = await getFoodById(id);
-      console.log(foodResult);
+      // console.log(foodResult);
       setFood(foodResult);
     }
     getFood();
@@ -18,7 +18,7 @@ function DetailsRecipeFood({ match }) {
   if (food) {
     let id = 0;
     const entries = Object.entries(food);
-    console.log(entries);
+    // console.log(entries);
     return (
       <div>
         <img
@@ -57,6 +57,7 @@ function DetailsRecipeFood({ match }) {
         <p data-testid="instructions">{food.strInstructions }</p>
         {/* Aqui fica o video do you tube requisito 33 */}
         <iframe
+          data-testid="video"
           width="200"
           src={ food.strYoutube.replace('watch?v=', 'embed/') }
           title="YouTube video player"
