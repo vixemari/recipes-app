@@ -9,7 +9,7 @@ function CardsFood() {
 
   return (
     recipesMax.map(({ idMeal, strMealThumb, strMeal }, index) => (
-      <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
+      <Link to={ `/foods/${idMeal}` } key={ idMeal }>
         <div data-testid={ `${index}-recipe-card` }>
           <img
             data-testid={ `${index}-card-img` }
