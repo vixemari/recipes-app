@@ -53,7 +53,7 @@ export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
     if (dataFirstLetter.meals !== null) {
-      console.log(dataFirstLetter);
+      // console.log(dataFirstLetter);
       return dataFirstLetter;
     }
     global.alert(ERROR_FOOD_DRINK_NULL);
@@ -97,7 +97,7 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
     if (dataFirstLetter.drinks !== null) {
-      console.log(dataName);
+      // console.log(dataFirstLetter);
       return dataFirstLetter;
     }
     global.alert(ERROR_FOOD_DRINK_NULL);
