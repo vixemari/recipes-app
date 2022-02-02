@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
-  fetchSearchBarHeaderIgredient,
-  fetchSearchBarHeaderName,
-  fetchSearchBarHeaderFirstLetter,
+  fetchSearchBarFoodsIgredient,
+  fetchSearchBarFoodsName,
+  fetchSearchBarFoodsFirstLetter,
+  fetchSearchBarDrinksIngredient,
+  fetchSearchBarDrinksName,
+  fetchSearchBarDrinksFirstLetter,
 } from '../service/fetchApi';
 
 function SearchBarHeader() {
+  // location para pegar as rotas
+  const location = useLocation();
+  const history = useHistory();
+
   // valores dos radios
-  const valueIngredient = 'ingredient';
   const valueName = 'name';
+  const valueIngredient = 'ingredient';
   const valueFirstLetter = 'firstLetter';
 
   // declaração dos states
@@ -27,16 +35,57 @@ function SearchBarHeader() {
   // função pra deixar a primeira letra maiúscula de cada radio
   const firstLetterToUpperCase = (str) => str[0].toUpperCase() + str.substring(1);
 
+  // funções que redireciona para a página caso haja apenas uma receita
+  const redirectToFood = (id) => {
+    history.push(`/foods/${id}`);
+  };
+
+  const redirectToDrink = (id) => {
+    history.push(`/drinks/${id}`);
+  };
+
   // função do click, faz a requisição da API
-  const onHandleClick = () => {
+  const getFoodFilter = async () => {
+  // const onHandleClick = () => {
+    let response;
     if (radioSelectedState === 'ingredient') {
-      fetchSearchBarHeaderIgredient(inputSearchState);
+      response = await fetchSearchBarFoodsIgredient(inputSearchState);
     }
     if (radioSelectedState === 'name') {
-      fetchSearchBarHeaderName(inputSearchState);
+      response = await fetchSearchBarFoodsName(inputSearchState);
     }
     if (radioSelectedState === 'firstLetter') {
-      fetchSearchBarHeaderFirstLetter(inputSearchState);
+      response = await fetchSearchBarFoodsFirstLetter(inputSearchState);
+    }
+    if (response && response.meals !== null && response.meals.length === 1) {
+      const { idMeal } = response.meals[0];
+      redirectToFood(idMeal);
+    }
+    // console.log(response);
+  };
+
+  const getDrinksFilter = async () => {
+    let response;
+    if (radioSelectedState === 'ingredient') {
+      response = await fetchSearchBarDrinksIngredient(inputSearchState);
+    }
+    if (radioSelectedState === 'name') {
+      response = await fetchSearchBarDrinksName(inputSearchState);
+    }
+    if (radioSelectedState === 'firstLetter') {
+      response = await fetchSearchBarDrinksFirstLetter(inputSearchState);
+    }
+    if (response && response.drinks !== null && response.drinks.length === 1) {
+      const { idDrink } = response.drinks[0];
+      redirectToDrink(idDrink);
+    }
+  };
+
+  const onHandleClick = () => {
+    if (location.pathname === '/foods') {
+      getFoodFilter();
+    } else {
+      getDrinksFilter();
     }
   };
 
@@ -82,9 +131,4 @@ function SearchBarHeader() {
   );
 }
 
-// InputHeader.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   btnSearch: PropTypes.bool.isRequired,
-// };
-//
 export default SearchBarHeader;
