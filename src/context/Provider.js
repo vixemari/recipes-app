@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import { getDrinks, getMeals, getFoodCategories,
-  getDrinksCategories } from '../service/fetchApi';
+  getDrinksCategories, getMealsForId } from '../service/fetchApi';
 
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [recipesCategory, setRecipesCategory] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
+
+  const [mealId, setMealId] = useState('');
+  const [idResultMeal, setIdResultMeal] = useState([]);
+  const [resultMealId] = useState([...idResultMeal]);
 
   const contextValue = {
     recipes,
@@ -20,7 +24,23 @@ function Provider({ children }) {
     drinkCategory,
     setDrinkCategory,
 
+    resultMealId,
+    setMealId,
+    idResultMeal,
+    setIdResultMeal,
+    mealId,
+
   };
+
+  useEffect(() => {
+    async function requireMealForId() {
+      const mealResult = await getMealsForId(mealId)
+        .then(({ meals }) => setIdResultMeal(meals));
+      return mealResult;
+    }
+    requireMealForId();
+  }, [mealId]);
+
   useEffect(() => {
     async function inicialRecipes() {
       const mealsResult = await getMeals();
