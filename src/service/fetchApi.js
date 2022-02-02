@@ -69,17 +69,14 @@ export async function fetchSearchBarDrinksIngredient(ingredient) {
     console.log(dataIngredient);
     return dataIngredient;
   }
-
-};
+  global.alert(ERROR_FOOD_DRINK_NULL);
+}
 
 export const filter = async (api) => {
   const result = await fetch(api);
   const data = await result.json();
   return data;
 };
-
-  global.alert(ERROR_FOOD_DRINK_NULL);
-}
 
 export async function fetchSearchBarDrinksName(name) {
   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
@@ -106,4 +103,3 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     global.alert(ERROR_FOOD_DRINK_NULL);
   }
 }
-
