@@ -69,6 +69,15 @@ export async function fetchSearchBarDrinksIngredient(ingredient) {
     console.log(dataIngredient);
     return dataIngredient;
   }
+
+};
+
+export const filter = async (api) => {
+  const result = await fetch(api);
+  const data = await result.json();
+  return data;
+};
+
   global.alert(ERROR_FOOD_DRINK_NULL);
 }
 
@@ -97,3 +106,4 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     global.alert(ERROR_FOOD_DRINK_NULL);
   }
 }
+
