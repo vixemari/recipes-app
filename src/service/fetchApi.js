@@ -16,6 +16,7 @@ export async function getMealsForId(id) {
   const response = await fetch(URL);
   const data = await response.json();
   console.log(data);
+  return data;
 }
 
 export async function getFoodCategories() {
