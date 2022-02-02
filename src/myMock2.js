@@ -1,4 +1,4 @@
-export default myMock = [{
+const myMock = [{
   dateModified: null,
   idMeal: '52977',
   strArea: 'Turkish',
@@ -74,3 +74,5 @@ Add the tomato paste and stir it around for
   strTags: 'Soup',
   strYoutube: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
 }];
+
+export default myMock;
