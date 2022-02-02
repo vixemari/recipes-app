@@ -22,7 +22,7 @@ function DetailsRecipeFood() {
       <button
         type="button"
         // talvez aki seja foods
-        onClick={ () => history.push(`/foods/${id}/in-progress`) }
+        onClick={ () => history.push(`/food/${id}/in-progress`) }
         data-testid="start-recipe-btn"
       >
         Iniciar Receita
