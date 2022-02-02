@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import Context from '../context/Context';
 import {
   fetchSearchBarFoodsIgredient,
   fetchSearchBarFoodsName,
@@ -10,6 +11,8 @@ import {
 } from '../service/fetchApi';
 
 function SearchBarHeader() {
+  const context = useContext(Context);
+  const { setFiltered } = context;
   // location para pegar as rotas
   const location = useLocation();
   const history = useHistory();
@@ -50,12 +53,15 @@ function SearchBarHeader() {
     let response;
     if (radioSelectedState === 'ingredient') {
       response = await fetchSearchBarFoodsIgredient(inputSearchState);
+      setFiltered(response);
     }
     if (radioSelectedState === 'name') {
       response = await fetchSearchBarFoodsName(inputSearchState);
+      setFiltered(response);
     }
     if (radioSelectedState === 'firstLetter') {
       response = await fetchSearchBarFoodsFirstLetter(inputSearchState);
+      setFiltered(response);
     }
     if (response && response.meals !== null && response.meals.length === 1) {
       const { idMeal } = response.meals[0];
@@ -68,12 +74,15 @@ function SearchBarHeader() {
     let response;
     if (radioSelectedState === 'ingredient') {
       response = await fetchSearchBarDrinksIngredient(inputSearchState);
+      setFiltered(response);
     }
     if (radioSelectedState === 'name') {
       response = await fetchSearchBarDrinksName(inputSearchState);
+      setFiltered(response);
     }
     if (radioSelectedState === 'firstLetter') {
       response = await fetchSearchBarDrinksFirstLetter(inputSearchState);
+      setFiltered(response);
     }
     if (response && response.drinks !== null && response.drinks.length === 1) {
       const { idDrink } = response.drinks[0];
