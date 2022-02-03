@@ -32,7 +32,7 @@ function CardsDrinks() {
 
   return (
     drinksForRenderState.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-      <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
+      <Link to={ `/drinks/${idDrink}` } key={ idDrink }>
         <div data-testid={ `${index}-recipe-card` }>
           <img
             data-testid={ `${index}-card-img` }
