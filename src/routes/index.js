@@ -48,9 +48,6 @@ function Routes() {
       <Route exact path="/drinks/:id" component={ DetailsRecipeDrink } />
       <Route exact path="/foods/:id/in-progress" component={ RecipesInProgress } />
       <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
-
-      {/*
-      */}
     </Switch>
   );
 }

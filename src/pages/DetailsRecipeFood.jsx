@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getFoodById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
+import RecomendationCarousel from '../components/RecomendationCarousel';
+import setLocalStorage from '../service/setLocalStorage';
+import './details.css';
+// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+const copy = require('clipboard-copy');
+
+// const favoriteRecipesByLocalStorage = localStorage.getItem('favoriteRecipes');
+// checkIsFavoriteRecipes = (recipe) => (recipe.id === food.idMeal);
+// const [canFavoriteRecipe, setCanFavoriteRecipe] = useState(
+//   { isFavoriteRecipe: favoriteRecipesByLocalStorage
+//     .some(checkIsFavoriteRecipes),
+//   },
+// );
 
 function DetailsRecipeFood({ match }) {
   const [food, setFood] = useState();
   const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
+  const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     const { id } = match.params;
     async function getFood() {
       const foodResult = await getFoodById(id);
-      // console.log(foodResult);
       setFood(foodResult);
     }
     getFood();
   }, []);
 
-  const history = useHistory();
   function handleClick() {
     const { id } = match.params;
     return history.push(`/foods/${id}/in-progress`);
@@ -26,12 +41,33 @@ function DetailsRecipeFood({ match }) {
 
   function handleClickShare() {
     setCopyLink({ isLinkCopied: true });
+    const { pathname } = location;
+    const link = `http://localhost:3000${pathname}`;
+    copy(link);
+  }
+
+  function favoriteRecipe(event) {
+    event.preventDefault();
+    setLocalStorage(food);
+    setCanFavoriteRecipe(
+      ({ isFavoriteRecipe }) => ({ isFavoriteRecipe: !isFavoriteRecipe }),
+    );
+  }
+
+  function getMeasures(entries) {
+    const currentMeasure = entries.reduce((acc, entrie) => {
+      if (entrie[0].includes('strMeasure')
+        && entrie[1] !== null && entrie[1] !== '') {
+        acc.push(entrie[1]);
+      }
+      return acc;
+    }, []);
+    return currentMeasure;
   }
 
   if (food) {
     let id = 0;
     const entries = Object.entries(food);
-    // console.log(entries);
     return (
       <div>
         <img
@@ -50,24 +86,33 @@ function DetailsRecipeFood({ match }) {
           <img src={ shareIcon } alt="share icon" />
         </button>
         {copyLink.isLinkCopied && <p>Link copied!</p>}
-        <button type="button" data-testid="favorite-btn">Favoritar</button>
+
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          // src={ canFavoriteRecipe.isFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+          onClick={ favoriteRecipe }
+        >
+          {/* {canFavoriteRecipe.isFavoriteRecipe
+            ? (<img src={ blackHeartIcon } alt="blackHeart" />)
+            : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
+        </button>
+
         <p data-testid="recipe-category">{ food.strCategory }</p>
-        {/* Aqui fica os ingredientes - requisito 33 */}
         <ul>
           Ingredients:
           {entries.map((entrie) => {
+            getMeasures(entries);
             if (entrie[0].includes('strIngredient')
             && entrie[1] !== null && entrie[1] !== '') {
-              if (entrie[0].includes('strIngredient1')) {
-                id = 0;
-              } else {
-                id += 1;
-              }
+              // eslint-disable-next-line no-unused-expressions
+              entrie[0].includes('strIngredient1') ? id = 0 : id += 1;
+              const measures = getMeasures(entries);
               return (
                 <li
                   data-testid={ `${id}-ingredient-name-and-measure` }
                 >
-                  {`${entrie[1]} -`}
+                  {`${entrie[1]} - ${measures[id]}`}
                 </li>
               );
             }
@@ -76,7 +121,6 @@ function DetailsRecipeFood({ match }) {
         </ul>
 
         <p data-testid="instructions">{food.strInstructions }</p>
-        {/* Aqui fica o video do you tube requisito 33 */}
         <iframe
           data-testid="video"
           width="200"
@@ -88,14 +132,16 @@ function DetailsRecipeFood({ match }) {
           encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-        {/* Aqui fica o card de receitas recomendandas requisito 33 */}
+        <RecomendationCarousel isRecipeFood />
         <button
+          className="button"
           type="button"
           data-testid="start-recipe-btn"
           onClick={ handleClick }
         >
-          Iniciar Receita
+          Start Recipe
         </button>
+
       </div>
     );
   }

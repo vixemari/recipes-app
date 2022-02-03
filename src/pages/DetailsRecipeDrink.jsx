@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getDrinksById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
+import './details.css';
+// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import RecomendationCarousel from '../components/RecomendationCarousel';
+
+const copy = require('clipboard-copy');
 
 function DetailsRecipeDrink({ match }) {
   const [drink, setDrink] = useState();
   const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
-  const copy = require('clipboard-copy');
+  // const [canFavoriteRecipe, setCanFavoriteRecipe] = useState({ isFavoriteRecipe: false });
 
   useEffect(() => {
     const { id } = match.params;
@@ -20,6 +26,7 @@ function DetailsRecipeDrink({ match }) {
   }, []);
 
   const history = useHistory();
+  const location = useLocation();
   function handleClick() {
     const { id } = match.params;
     return history.push(`/drinks/${id}/in-progress`);
@@ -27,6 +34,28 @@ function DetailsRecipeDrink({ match }) {
 
   function handleClickShare() {
     setCopyLink({ isLinkCopied: true });
+    const { pathname } = location;
+    const link = `http://localhost:3000${pathname}`;
+    copy(link);
+  }
+
+  function favoriteRecipe(event) {
+    event.preventDefault();
+    setCanFavoriteRecipe(
+      ({ isFavoriteRecipe }) => ({ isFavoriteRecipe: !isFavoriteRecipe }),
+    );
+  }
+
+  function getMeasures(entries) {
+    const currentMeasure = [];
+    // eslint-disable-next-line array-callback-return
+    entries.map((entrie) => {
+      if (entrie[0].includes('strMeasure')
+        && entrie[1] !== null && entrie[1] !== '') {
+        currentMeasure.push(entrie[1]);
+      }
+    });
+    return currentMeasure;
   }
 
   if (drink) {
@@ -51,24 +80,35 @@ function DetailsRecipeDrink({ match }) {
           <img src={ shareIcon } alt="share icon" />
         </button>
         {copyLink.isLinkCopied && <p>Link copied!</p>}
-        <button type="button" data-testid="favorite-btn">Favoritar</button>
+
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          // src={ canFavoriteRecipe.isFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+          onClick={ favoriteRecipe }
+        >
+          {/* {canFavoriteRecipe.isFavoriteRecipe
+            ? (<img src={ blackHeartIcon } alt="blackHeart" />)
+            : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
+        </button>
+
         <p data-testid="recipe-category">{ drink.strAlcoholic }</p>
         {/* Aqui fica os ingredientes - requisito 33 */}
         <ul>
           Ingredients:
           {entries.map((entrie) => {
+            getMeasures(entries);
             if (entrie[0].includes('strIngredient')
             && entrie[1] !== null && entrie[1] !== '') {
-              if (entrie[0].includes('strIngredient1')) {
-                id = 0;
-              } else {
-                id += 1;
-              }
+              // eslint-disable-next-line no-unused-expressions
+              entrie[0].includes('strIngredient1') ? id = 0 : id += 1;
+              // eslint-disable-next-line array-callback-return
+              const measures = getMeasures(entries);
               return (
                 <li
                   data-testid={ `${id}-ingredient-name-and-measure` }
                 >
-                  {`${entrie[1]} -`}
+                  {`${entrie[1]} - ${measures[id]}`}
                 </li>
               );
             }
@@ -77,14 +117,16 @@ function DetailsRecipeDrink({ match }) {
         </ul>
         <p data-testid="instructions">{ drink.strInstructions }</p>
         {/* Aqui fica o card de receitas recomendandas requisito 33 */}
-        <div data-testid="0-recomendation-card">Recomendações</div>
+        <RecomendationCarousel isRecipeFood={ false } />
         <button
+          className="button"
           type="button"
           data-testid="start-recipe-btn"
           onClick={ handleClick }
         >
-          Iniciar Receita
+          Start Recipe
         </button>
+
       </div>
     );
   }
