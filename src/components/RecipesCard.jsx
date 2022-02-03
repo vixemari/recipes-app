@@ -10,7 +10,7 @@ function CardsFood() {
   const context = useContext(Context);
   const { recipes, filtered } = context;
 
-  const recipesDefault = recipes.filter((_, index) => index <= MAX_LENGTH);
+  let recipesDefault = recipes.filter((_, index) => index <= MAX_LENGTH);
 
   const [recipesForRenderState, setRecipesForRenderState] = useState(recipesDefault);
 
@@ -19,7 +19,7 @@ function CardsFood() {
     if (recipesForRenderState.length === 0) {
       setRecipesForRenderState(recipesDefault);
     }
-  });
+  }, [recipes]);
 
   // logica para realizar o filtro
   // o button de SearchBarHeader ativa os fetchs da API e joga no context
@@ -27,6 +27,7 @@ function CardsFood() {
   // verifica se existe algum valor dentro do filtro do context e substitui o valor a ser renderizado
 
   useEffect(() => {
+    recipesDefault = recipes.filter((_, index) => index <= MAX_LENGTH);
     if (filtered !== undefined) {
       if (filtered.meals !== undefined) {
         const newRecipes = filtered.meals.filter((_, index) => index <= MAX_LENGTH);
@@ -35,7 +36,7 @@ function CardsFood() {
         setRecipesForRenderState(recipesDefault);
       }
     }
-  }, [filtered]);
+  }, [recipes, filtered]);
 
   return (
     recipesForRenderState.map(({ idMeal, strMealThumb, strMeal }, index) => (

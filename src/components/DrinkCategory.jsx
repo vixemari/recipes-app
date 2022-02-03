@@ -4,7 +4,7 @@ import { filter } from '../service/fetchApi';
 
 const MAX_LENGTH = 4;
 export default function DrinkCategoryFilter() {
-  const { drinkCategory, setDrinks, drinks } = useContext(Context);
+  const { drinkCategory, setDrinks, drinks, setFiltered } = useContext(Context);
   const [toogle, setToogle] = useState('');
   const [untoogle, setUntoogle] = useState([]);
 
@@ -14,13 +14,15 @@ export default function DrinkCategoryFilter() {
     if (toogle === value || value === 'All') {
       setDrinks(untoogle);
       setToogle('');
+      setFiltered([]);
     } else {
       const data = await filter(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${value}`);
       setUntoogle(drinks);
       setDrinks(data.drinks);
+      setFiltered([]);
     }
   };
-  const maxDrinks = drinkCategory.filter((meal, index) => index <= MAX_LENGTH);
+  const maxDrinks = drinkCategory.filter((_, index) => index <= MAX_LENGTH);
 
   return (
     <form>

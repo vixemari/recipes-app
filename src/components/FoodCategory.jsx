@@ -4,7 +4,7 @@ import { filter } from '../service/fetchApi';
 
 const MAX_LENGTH = 4;
 export default function FoodCategoryFilter() {
-  const { recipesCategory, setRecipes, recipes } = useContext(Context);
+  const { recipesCategory, setRecipes, recipes, setFiltered } = useContext(Context);
   const [toogle, setToogle] = useState('');
   const [untoogle, setUntoogle] = useState([]);
 
@@ -14,13 +14,15 @@ export default function FoodCategoryFilter() {
     if (toogle === value || value === 'All') {
       setRecipes(untoogle);
       setToogle('');
+      setFiltered([]);
     } else {
       const data = await filter(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${value}`);
       setUntoogle(recipes);
       setRecipes(data.meals);
+      setFiltered([]);
     }
   };
-  const foods = recipesCategory.filter((meal, index) => index <= MAX_LENGTH);
+  const foods = recipesCategory.filter((_, index) => index <= MAX_LENGTH);
   return (
     <form>
       { foods.map(({ strCategory }, index) => (

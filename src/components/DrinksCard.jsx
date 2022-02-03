@@ -9,16 +9,17 @@ function CardsDrinks() {
   const context = useContext(Context);
   const { drinks, filtered } = context;
 
-  const drinksDefault = drinks.filter((_, index) => index <= MAX_LENGTH);
+  let drinksDefault = drinks.filter((_, index) => index <= MAX_LENGTH);
   const [drinksForRenderState, setDrinksForRenderState] = useState(drinksDefault);
 
   useEffect(() => {
     if (drinksForRenderState.length === 0) {
       setDrinksForRenderState(drinksDefault);
     }
-  });
+  }, [drinks]);
 
   useEffect(() => {
+    drinksDefault = drinks.filter((_, index) => index <= MAX_LENGTH);
     if (filtered !== undefined) {
       if (filtered.drinks !== undefined) {
         const newDrinks = filtered.drinks.filter((_, index) => index <= MAX_LENGTH);
@@ -27,7 +28,7 @@ function CardsDrinks() {
         setDrinksForRenderState(drinksDefault);
       }
     }
-  }, [filtered]);
+  }, [drinks, filtered]);
 
   return (
     drinksForRenderState.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
