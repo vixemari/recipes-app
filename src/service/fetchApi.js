@@ -104,13 +104,13 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
   }
 }
 
-export async function randonExploreFoods() {
+export async function randomExploreFoods() {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
   const data = await response.json();
   return data.meals;
 }
 
-export async function randonExploreDrinks() {
+export async function randomExploreDrinks() {
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
   const data = await response.json();
   return data.drinks;
