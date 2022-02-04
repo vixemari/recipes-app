@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import { getDrinks, getMeals, getFoodCategories,
-  getDrinksCategories } from '../service/fetchApi';
+  getDrinksCategories, getMealsForId } from '../service/fetchApi';
 
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
@@ -10,6 +10,11 @@ function Provider({ children }) {
   const [recipesCategory, setRecipesCategory] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
 
+  const [mealId, setMealId] = useState('');
+  const [idResultMeal, setIdResultMeal] = useState([]);
+  // const [resultMealId, setResultMealId] = useState([idResultMeal]);
+  const [isFetch, setIsFetch] = useState(true);
+  // console.log(idResultMeal);
   const contextValue = {
     recipes,
     setRecipes,
@@ -20,7 +25,25 @@ function Provider({ children }) {
     drinkCategory,
     setDrinkCategory,
 
+    isFetch,
+    // resultMealId,
+    setMealId,
+    idResultMeal,
+    setIdResultMeal,
+    mealId,
+
   };
+
+  useEffect(() => {
+    async function requireMealForId() {
+      const mealResult = await getMealsForId(mealId)
+        .then(({ meals }) => setIdResultMeal(meals));
+      setIsFetch(false);
+      return mealResult;
+    }
+    requireMealForId();
+  }, [mealId]);
+
   useEffect(() => {
     async function inicialRecipes() {
       const mealsResult = await getMeals();
