@@ -47,14 +47,13 @@ function DetailsRecipeDrink({ match }) {
   }
 
   function getMeasures(entries) {
-    const currentMeasure = [];
-    // eslint-disable-next-line array-callback-return
-    entries.map((entrie) => {
+    const currentMeasure = entries.reduce((acc, entrie) => {
       if (entrie[0].includes('strMeasure')
         && entrie[1] !== null && entrie[1] !== '') {
-        currentMeasure.push(entrie[1]);
+        acc.push(entrie[1]);
       }
-    });
+      return acc;
+    }, []);
     return currentMeasure;
   }
 
