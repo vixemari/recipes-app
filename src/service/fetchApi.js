@@ -1,3 +1,15 @@
+export async function getDrinksById(id) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  return data.drinks[0];
+}
+
+export async function getFoodById(id) {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  return data.meals[0];
+}
+
 const ERROR_FOOD_DRINK_NULL = 'Sorry, we haven\'t found any recipes for these filters.';
 export async function getMeals() {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -61,7 +73,7 @@ export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
     if (dataFirstLetter.meals !== null) {
-      console.log(dataFirstLetter);
+      // console.log(dataFirstLetter);
       return dataFirstLetter;
     }
     global.alert(ERROR_FOOD_DRINK_NULL);
@@ -79,6 +91,12 @@ export async function fetchSearchBarDrinksIngredient(ingredient) {
   }
   global.alert(ERROR_FOOD_DRINK_NULL);
 }
+
+export const filter = async (api) => {
+  const result = await fetch(api);
+  const data = await result.json();
+  return data;
+};
 
 export async function fetchSearchBarDrinksName(name) {
   const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
@@ -99,7 +117,7 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
     if (dataFirstLetter.drinks !== null) {
-      console.log(dataName);
+      // console.log(dataFirstLetter);
       return dataFirstLetter;
     }
     global.alert(ERROR_FOOD_DRINK_NULL);

@@ -7,6 +7,7 @@ import { getDrinks, getMeals, getFoodCategories,
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [filtered, setFiltered] = useState([]);
   const [recipesCategory, setRecipesCategory] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
 
@@ -24,14 +25,14 @@ function Provider({ children }) {
     setRecipesCategory,
     drinkCategory,
     setDrinkCategory,
-
     isFetch,
     // resultMealId,
     setMealId,
     idResultMeal,
     setIdResultMeal,
     mealId,
-
+    filtered,
+    setFiltered,
   };
 
   useEffect(() => {

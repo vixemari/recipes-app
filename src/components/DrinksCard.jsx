@@ -1,15 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 
 const MAX_LENGTH = 11;
+
 function CardsDrinks() {
-  const { drinks } = useContext(Context);
-  const drinksMax = drinks.filter((drink, index) => index <= MAX_LENGTH);
+  // context
+  const context = useContext(Context);
+  const { drinks, filtered } = context;
+
+  let drinksDefault = drinks.filter((_, index) => index <= MAX_LENGTH);
+  const [drinksForRenderState, setDrinksForRenderState] = useState(drinksDefault);
+
+  useEffect(() => {
+    if (drinksForRenderState.length === 0) {
+      setDrinksForRenderState(drinksDefault);
+    }
+  }, [drinks]);
+
+  useEffect(() => {
+    drinksDefault = drinks.filter((_, index) => index <= MAX_LENGTH);
+    if (filtered !== undefined) {
+      if (filtered.drinks !== undefined) {
+        const newDrinks = filtered.drinks.filter((_, index) => index <= MAX_LENGTH);
+        setDrinksForRenderState(newDrinks);
+      } else {
+        setDrinksForRenderState(drinksDefault);
+      }
+    }
+  }, [drinks, filtered]);
 
   return (
-    drinksMax.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-      <Link to={ `/bebidas/${idDrink}` } key={ idDrink }>
+    drinksForRenderState.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+      <Link to={ `/drinks/${idDrink}` } key={ idDrink }>
         <div data-testid={ `${index}-recipe-card` }>
           <img
             data-testid={ `${index}-card-img` }

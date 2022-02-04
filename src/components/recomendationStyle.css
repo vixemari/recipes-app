@@ -1,0 +1,14 @@
+.carousel {
+  height: 100px;
+  overflow-x: auto;
+  width: 30em;
+}
+
+.wrapper_child {
+  width: 600em;
+}
+
+.wrapper_child > .tab {
+  float: left;
+  padding: 40px;
+}
