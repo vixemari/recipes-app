@@ -100,9 +100,11 @@ function DetailsRecipeDrink({ match }) {
             getMeasures(entries);
             if (entrie[0].includes('strIngredient')
             && entrie[1] !== null && entrie[1] !== '') {
-              // eslint-disable-next-line no-unused-expressions
-              entrie[0].includes('strIngredient1') ? id = 0 : id += 1;
-              // eslint-disable-next-line array-callback-return
+              if (entrie[0].includes('strIngredient1')) {
+                id = 0;
+              } else {
+                id += 1;
+              }
               const measures = getMeasures(entries);
               return (
                 <li
