@@ -10,6 +10,7 @@ export async function getFoodById(id) {
   return data.meals[0];
 }
 
+const ERROR_FOOD_DRINK_NULL = 'Sorry, we haven\'t found any recipes for these filters.';
 export async function getMeals() {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
@@ -33,27 +34,84 @@ export async function getDrinksCategories() {
   return data.drinks;
 }
 
-export const fetchSearchBarHeaderIgredient = async (ingredient) => {
+// endpoints do food
+export async function fetchSearchBarFoodsIgredient(ingredient) {
   const url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const response = await fetch(url);
   const dataIngredient = await response.json();
-  console.log(dataIngredient);
-};
+  if (dataIngredient.meals !== null) {
+    console.log(dataIngredient);
+    return dataIngredient;
+  }
+  global.alert(ERROR_FOOD_DRINK_NULL);
+}
 
-export const fetchSearchBarHeaderName = async (name) => {
+export async function fetchSearchBarFoodsName(name) {
   const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(url);
   const dataName = await response.json();
-  console.log(dataName);
-};
+  if (dataName.meals !== null) {
+    console.log(dataName);
+    return dataName;
+  }
+  global.alert(ERROR_FOOD_DRINK_NULL);
+}
 
-export const fetchSearchBarHeaderFirstLetter = async (firstLetter) => {
+export async function fetchSearchBarFoodsFirstLetter(firstLetter) {
   if (firstLetter.length > 1) {
     global.alert('Your search must have only 1 (one) character');
   } else {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`;
     const response = await fetch(url);
     const dataFirstLetter = await response.json();
-    console.log(dataFirstLetter);
+    if (dataFirstLetter.meals !== null) {
+      // console.log(dataFirstLetter);
+      return dataFirstLetter;
+    }
+    global.alert(ERROR_FOOD_DRINK_NULL);
   }
+}
+
+// endpoints dos drinks
+export async function fetchSearchBarDrinksIngredient(ingredient) {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const response = await fetch(url);
+  const dataIngredient = await response.json();
+  if (dataIngredient.drinks !== null) {
+    console.log(dataIngredient);
+    return dataIngredient;
+  }
+  global.alert(ERROR_FOOD_DRINK_NULL);
+}
+
+export const filter = async (api) => {
+  const result = await fetch(api);
+  const data = await result.json();
+  return data;
 };
+
+export async function fetchSearchBarDrinksName(name) {
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
+  const response = await fetch(url);
+  const dataName = await response.json();
+  if (dataName.drinks !== null) {
+    console.log(dataName);
+    return dataName;
+  }
+  global.alert(ERROR_FOOD_DRINK_NULL);
+}
+
+export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
+  if (firstLetter.length > 1) {
+    global.alert('Your search must have only 1 (one) character');
+  } else {
+    const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`;
+    const response = await fetch(url);
+    const dataFirstLetter = await response.json();
+    if (dataFirstLetter.drinks !== null) {
+      // console.log(dataFirstLetter);
+      return dataFirstLetter;
+    }
+    global.alert(ERROR_FOOD_DRINK_NULL);
+  }
+}

@@ -1,36 +1,52 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Context from '../context/Context';
+import { filter } from '../service/fetchApi';
 
 const MAX_LENGTH = 4;
+export default function FoodCategoryFilter() {
+  const { recipesCategory, setRecipes, recipes, setFiltered } = useContext(Context);
+  const [toogle, setToogle] = useState('');
+  const [untoogle, setUntoogle] = useState([]);
 
-function FoodCategory() {
-  const { recipesCategory } = useContext(Context);
-  const maxCategories = recipesCategory.filter((category, index) => index <= MAX_LENGTH);
-
+  const handleClick = async ({ target }) => {
+    const { value } = target;
+    setToogle(value);
+    if (toogle === value || value === 'All') {
+      setRecipes(untoogle);
+      setToogle('');
+      setFiltered([]);
+    } else {
+      const data = await filter(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${value}`);
+      setUntoogle(recipes);
+      setRecipes(data.meals);
+      setFiltered([]);
+    }
+  };
+  const foods = recipesCategory.filter((_, index) => index <= MAX_LENGTH);
   return (
-    <div>
-      <button
-        data-testid="All-category-filter"
-        type="button"
-      >
-        All
-
-      </button>
-      { maxCategories.map(({ strCategory }, index) => (
+    <form>
+      { foods.map(({ strCategory }, index) => (
         <div key={ index }>
           <button
             type="button"
             id={ `${strCategory}-category-btn` }
             value={ strCategory }
             data-testid={ `${strCategory}-category-filter` }
-
+            onClick={ handleClick }
           >
             { strCategory }
           </button>
         </div>
       ))}
-    </div>
+      <button
+        type="button"
+        id="All-category-btn"
+        value="All"
+        data-testid="All-category-filter"
+        onClick={ handleClick }
+      >
+        All
+      </button>
+    </form>
   );
 }
-
-export default FoodCategory;
