@@ -1,7 +1,7 @@
 .carousel {
-  width: 30em;
-  overflow-x: auto;
   height: 100px;
+  overflow-x: auto;
+  width: 30em;
 }
 
 .wrapper_child {
@@ -9,6 +9,6 @@
 }
 
 .wrapper_child > .tab {
-  float:left;
-  padding:40px;
+  float: left;
+  padding: 40px;
 }
