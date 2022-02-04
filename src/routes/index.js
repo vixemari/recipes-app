@@ -14,7 +14,7 @@ import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DetailsRecipeFood from '../pages/DetailsRecipeFood';
 import DetailsRecipeDrink from '../pages/DetailsRecipeDrink';
-import RecipesInProgress from '../pages/RecipesInProgress';
+import RecipesInProgress from '../components/recipesInProgress/RecepiesInProgress';
 import DrinkInProgress from '../pages/DrinkInProgress';
 
 function Routes() {

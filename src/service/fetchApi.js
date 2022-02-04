@@ -23,6 +23,14 @@ export async function getDrinks() {
   return data.drinks;
 }
 
+export async function getMealsForId(id) {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
 export async function getFoodCategories() {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
   const data = await response.json();

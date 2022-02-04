@@ -39,7 +39,6 @@ function CardsFood() {
   }, [recipes, filtered]);
 
   return (
-
     recipesForRenderState.map(({ idMeal, strMealThumb, strMeal }, index) => (
       <Link to={ `/foods/${idMeal}` } key={ idMeal }>
         <div data-testid={ `${index}-recipe-card` }>

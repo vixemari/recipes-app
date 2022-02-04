@@ -24,7 +24,6 @@ function DetailsRecipeFood({ match }) {
   const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
   const history = useHistory();
   const location = useLocation();
-
   useEffect(() => {
     const { id } = match.params;
     async function getFood() {
