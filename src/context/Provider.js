@@ -12,8 +12,9 @@ function Provider({ children }) {
 
   const [mealId, setMealId] = useState('');
   const [idResultMeal, setIdResultMeal] = useState([]);
-  const [resultMealId] = useState([...idResultMeal]);
-
+  // const [resultMealId, setResultMealId] = useState([idResultMeal]);
+  const [isFetch, setIsFetch] = useState(true);
+  // console.log(idResultMeal);
   const contextValue = {
     recipes,
     setRecipes,
@@ -24,7 +25,8 @@ function Provider({ children }) {
     drinkCategory,
     setDrinkCategory,
 
-    resultMealId,
+    isFetch,
+    // resultMealId,
     setMealId,
     idResultMeal,
     setIdResultMeal,
@@ -36,6 +38,7 @@ function Provider({ children }) {
     async function requireMealForId() {
       const mealResult = await getMealsForId(mealId)
         .then(({ meals }) => setIdResultMeal(meals));
+      setIsFetch(false);
       return mealResult;
     }
     requireMealForId();

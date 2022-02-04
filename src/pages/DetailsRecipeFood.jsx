@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams /* useLocation */ } from 'react-router-dom';
 
 function DetailsRecipeFood() {
   useEffect(() => {
     // const { id } = match.params;
   }, []);
+  // console.log(useLocation());
   const history = useHistory();
   const { id } = useParams();
   return (
@@ -22,11 +23,10 @@ function DetailsRecipeFood() {
       <button
         type="button"
         // talvez aki seja foods
-        onClick={ () => history.push(`/food/${id}/in-progress`) }
+        onClick={ () => history.push(`/foods/${id}/in-progress`) }
         data-testid="start-recipe-btn"
       >
-        Iniciar Receita
-
+        Start Recipe
       </button>
     </div>
   );
