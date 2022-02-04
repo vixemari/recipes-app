@@ -5,8 +5,7 @@ import './checkbox.css';
 export default function Teste({ value }) {
   function getMeasures(entries) {
     const currentMeasure = [];
-    // eslint-disable-next-line array-callback-return
-    entries.map((entrie) => {
+    entries.forEach((entrie) => {
       if (entrie[0].includes('strMeasure')
         && entrie[1] !== null && entrie[1] !== '') {
         currentMeasure.push(entrie[1]);
@@ -51,9 +50,11 @@ export default function Teste({ value }) {
         getMeasures(entries);
         if (entrie[0].includes('strIngredient')
             && entrie[1] !== null && entrie[1] !== '') {
-          // eslint-disable-next-line no-unused-expressions
-          entrie[0].includes('strIngredient1') ? idIndex = 0 : idIndex += 1;
-          // eslint-disable-next-line array-callback-return
+          if (entrie[0].includes('strIngredient1')) {
+            idIndex = 0;
+          } else {
+            idIndex += 1;
+          }
           const measures = getMeasures(entries);
           return (
             <div key={ idIndex }>
