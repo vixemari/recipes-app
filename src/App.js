@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Routes from './routes';
+import Routes from './routes/index';
 import Provider from './context/Provider';
 
 function App() {
