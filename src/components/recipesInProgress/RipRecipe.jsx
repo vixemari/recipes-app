@@ -14,7 +14,11 @@ export default function Content() {
   const { setMealId, idResultMeal, isFetch } = useContext(Context);
   const [valuesId, setValuesId] = useState(idResultMeal);
   const { id } = useParams();
-  setMealId(id);
+
+  useEffect(() => {
+    setMealId(id);
+    console.log(id);
+  }, []);
 
   useEffect(() => {
     if (valuesId.length === 0) {

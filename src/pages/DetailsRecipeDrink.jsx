@@ -108,6 +108,7 @@ function DetailsRecipeDrink({ match }) {
               return (
                 <li
                   data-testid={ `${id}-ingredient-name-and-measure` }
+                  key={ entrie[1] }
                 >
                   {`${entrie[1]} - ${measures[id]}`}
                 </li>

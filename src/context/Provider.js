@@ -37,13 +37,16 @@ function Provider({ children }) {
 
   useEffect(() => {
     async function requireMealForId() {
-      const mealResult = await getMealsForId(mealId)
-        .then(({ meals }) => setIdResultMeal(meals));
-      setIsFetch(false);
-      return mealResult;
+      if (mealId !== '') {
+        console.log(mealId);
+        const mealResult = await getMealsForId(mealId)
+          .then(({ meals }) => setIdResultMeal(meals));
+        setIsFetch(false);
+        return mealResult;
+      }
     }
     requireMealForId();
-  }, [mealId]);
+  }, []);
 
   useEffect(() => {
     async function inicialRecipes() {
