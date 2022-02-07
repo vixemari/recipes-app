@@ -42,12 +42,7 @@ function ButtonsOfExplore({ btnNationality, isFood }) {
           </button>
         )
       }
-      <button
-        type="button"
-        data-testid="explore-surprise"
-      >
-        Surprise me!
-      </button>
+
     </div>
   );
 }

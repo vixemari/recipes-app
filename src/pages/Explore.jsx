@@ -34,9 +34,11 @@ function Explore() {
       >
         Explore Drinks
       </button>
+
       <IndexFooter />
       {redirect.canRedirectToExploreFoods && <Redirect to="/explore/foods" />}
       {redirect.canRedirectToExploreDrinks && <Redirect to="/explore/drinks" />}
+
     </div>
   );
 }

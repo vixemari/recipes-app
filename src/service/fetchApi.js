@@ -123,3 +123,15 @@ export async function fetchSearchBarDrinksFirstLetter(firstLetter) {
     global.alert(ERROR_FOOD_DRINK_NULL);
   }
 }
+
+export async function randomExploreFoods() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  return data.meals;
+}
+
+export async function randomExploreDrinks() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  return data.drinks;
+}
