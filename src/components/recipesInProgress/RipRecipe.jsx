@@ -17,7 +17,6 @@ export default function Content() {
 
   useEffect(() => {
     setMealId(id);
-    console.log(id);
   }, []);
 
   useEffect(() => {
@@ -29,8 +28,8 @@ export default function Content() {
   return (
     <div>
       {
-        isFetch ? 'Loading...' : valuesId.map((e, index) => (
-          <div key={ index }>
+        isFetch ? 'Loading...' : valuesId.map((e) => (
+          <div key={ e.strMeal }>
             <div>
               <RecipesInProgressImg
                 img={ e.strMealThumb }

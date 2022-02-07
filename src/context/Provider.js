@@ -46,7 +46,7 @@ function Provider({ children }) {
       }
     }
     requireMealForId();
-  }, []);
+  }, [mealId]);
 
   useEffect(() => {
     async function inicialRecipes() {
