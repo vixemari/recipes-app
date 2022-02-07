@@ -14,7 +14,10 @@ export default function Content() {
   const { setMealId, idResultMeal, isFetch } = useContext(Context);
   const [valuesId, setValuesId] = useState(idResultMeal);
   const { id } = useParams();
-  setMealId(id);
+
+  useEffect(() => {
+    setMealId(id);
+  }, []);
 
   useEffect(() => {
     if (valuesId.length === 0) {
@@ -25,8 +28,8 @@ export default function Content() {
   return (
     <div>
       {
-        isFetch ? 'Loading...' : valuesId.map((e, index) => (
-          <div key={ index }>
+        isFetch ? 'Loading...' : valuesId.map((e) => (
+          <div key={ e.strMeal }>
             <div>
               <RecipesInProgressImg
                 img={ e.strMealThumb }

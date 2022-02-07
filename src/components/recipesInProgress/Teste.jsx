@@ -57,7 +57,7 @@ export default function Teste({ value }) {
           }
           const measures = getMeasures(entries);
           return (
-            <div key={ idIndex }>
+            <div key={ entrie[1] }>
               <label
                 htmlFor={ idIndex }
                 data-testid={ `${idIndex}-ingredient-name-and-measure` }
