@@ -2,7 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 
-export default function RecipeBtnFinish() {
+export default function InProgressBtnFinish() {
   const history = useHistory();
 
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './checkbox.css';
 
-export default function Teste({ value }) {
+export default function InProgressCheckBoxIngredient({ value }) {
   function getMeasures(entries) {
     const currentMeasure = [];
     entries.forEach((entrie) => {
@@ -65,6 +65,6 @@ export default function Teste({ value }) {
   );
 }
 
-Teste.propTypes = {
+InProgressCheckBoxIngredient.propTypes = {
   value: PropTypes.objectOf(PropTypes.any).isRequired,
 };
