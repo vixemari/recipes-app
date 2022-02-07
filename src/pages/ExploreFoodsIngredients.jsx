@@ -6,14 +6,13 @@ import { filter } from '../service/fetchApi';
 function ExploreFoodsIngredients() {
   const EXPLORE_FOODS_INGREDIENTS = 'Explore Ingredients';
   const MAX_LENGTH = 12;
-  // const [setRecipes] = useContext(Context);
-  const [ingredientes, setIngredientes] = useState([]);
-  // const history = useHistory();
+
+  const [mealIngredientes, setMealIngredientes] = useState([]);
 
   const fetchIngredients = async () => {
     const resultApi = await filter('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
     const recipes = resultApi.meals.slice(0, MAX_LENGTH);
-    setIngredientes(recipes);
+    setMealIngredientes(recipes);
   };
 
   useEffect(() => { fetchIngredients(); }, []);
@@ -21,7 +20,7 @@ function ExploreFoodsIngredients() {
   return (
     <div>
       <Header title={ EXPLORE_FOODS_INGREDIENTS } btnSearch={ false } />
-      { ingredientes.map(({ strIngredient }, index) => (
+      { mealIngredientes.map(({ strIngredient }, index) => (
         <button
           key={ index }
           type="button"
