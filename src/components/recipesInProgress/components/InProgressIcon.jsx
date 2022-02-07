@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function RecipesInProgressIcons({
+export default function InProgressIcon({
   whiteHeartIcon, blackHeartIcon, shareIcon }) {
   const [favorite, setFavorite] = useState(false);
   const isFavorite = () => {
@@ -19,7 +19,6 @@ export default function RecipesInProgressIcons({
           src={ favorite ? blackHeartIcon : whiteHeartIcon }
           alt="share-icon"
           width="30px"
-          // style={ { marginLeft: '10px' } }
           data-testid="favorite-btn"
         />
       </button>
@@ -33,7 +32,6 @@ export default function RecipesInProgressIcons({
           src={ shareIcon }
           alt="share-icon"
           width="30px"
-          // style={ { marginLeft: '10px' } }
           data-testid="favorite-btn"
         />
       </button>
@@ -41,7 +39,7 @@ export default function RecipesInProgressIcons({
   );
 }
 
-RecipesInProgressIcons.propTypes = {
+InProgressIcon.propTypes = {
   whiteHeartIcon: PropTypes.string.isRequired,
   blackHeartIcon: PropTypes.string.isRequired,
   shareIcon: PropTypes.string.isRequired,

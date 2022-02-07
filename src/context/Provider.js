@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 import { getDrinks, getMeals, getFoodCategories,
-  getDrinksCategories, getMealsForId } from '../service/fetchApi';
+  getDrinksCategories, getMealsForId, getDrinksForId } from '../service/fetchApi';
 
 function Provider({ children }) {
   const [recipes, setRecipes] = useState([]);
@@ -12,10 +12,10 @@ function Provider({ children }) {
   const [drinkCategory, setDrinkCategory] = useState([]);
 
   const [mealId, setMealId] = useState('');
-  const [idResultMeal, setIdResultMeal] = useState([]);
-  // const [resultMealId, setResultMealId] = useState([idResultMeal]);
+  const [contentMeal, setContentMeal] = useState([]);
   const [isFetch, setIsFetch] = useState(true);
-  // console.log(idResultMeal);
+  const [drinkId, setdrinkId] = useState('');
+  const [contentDrinkId, setcontentDrinkId] = useState([]);
   const contextValue = {
     recipes,
     setRecipes,
@@ -25,22 +25,37 @@ function Provider({ children }) {
     setRecipesCategory,
     drinkCategory,
     setDrinkCategory,
+
     isFetch,
-    // resultMealId,
     setMealId,
-    idResultMeal,
-    setIdResultMeal,
+    contentMeal,
+    setContentMeal,
     mealId,
+    setdrinkId,
+    contentDrinkId,
+
     filtered,
     setFiltered,
   };
+
+  useEffect(() => {
+    async function requireDrinkForId() {
+      if (drinkId !== '') {
+        const drinkResult = await getDrinksForId(drinkId)
+          .then((response) => setcontentDrinkId(response.drinks));
+        setIsFetch(false);
+        return drinkResult;
+      }
+    }
+    requireDrinkForId();
+  }, [drinkId]);
 
   useEffect(() => {
     async function requireMealForId() {
       if (mealId !== '') {
         console.log(mealId);
         const mealResult = await getMealsForId(mealId)
-          .then(({ meals }) => setIdResultMeal(meals));
+          .then(({ meals }) => setContentMeal(meals));
         setIsFetch(false);
         return mealResult;
       }

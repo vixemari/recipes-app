@@ -1,8 +1,13 @@
 import React from 'react';
+import ContentDrink from '../components/recipesInProgress/ContentDrink';
 
 function DrinkInProgress() {
   return (
-    <div>Drink</div>
+    <div>
+      Drink
+      <ContentDrink />
+    </div>
+
   );
 }
 
