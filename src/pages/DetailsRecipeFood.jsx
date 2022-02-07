@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getFoodById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendationCarousel from '../components/RecomendationCarousel';
-import setLocalStorage from '../service/setLocalStorage';
+import FavoriteBtn from '../components/DetailsPage/FavoriteBtn';
 import './details.css';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import StartBtn from '../components/DetailsPage/StartBtn';
+import Ul from '../components/DetailsPage/Ul';
 
 const copy = require('clipboard-copy');
-
-// const favoriteRecipesByLocalStorage = localStorage.getItem('favoriteRecipes');
-// checkIsFavoriteRecipes = (recipe) => (recipe.id === food.idMeal);
-// const [canFavoriteRecipe, setCanFavoriteRecipe] = useState(
-//   { isFavoriteRecipe: favoriteRecipesByLocalStorage
-//     .some(checkIsFavoriteRecipes),
-//   },
-// );
 
 function DetailsRecipeFood({ match }) {
   const [food, setFood] = useState();
   const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
-  const history = useHistory();
   const location = useLocation();
+
   useEffect(() => {
     const { id } = match.params;
     async function getFood() {
@@ -33,11 +25,6 @@ function DetailsRecipeFood({ match }) {
     getFood();
   }, []);
 
-  function handleClick() {
-    const { id } = match.params;
-    return history.push(`/foods/${id}/in-progress`);
-  }
-
   function handleClickShare() {
     setCopyLink({ isLinkCopied: true });
     const { pathname } = location;
@@ -45,28 +32,10 @@ function DetailsRecipeFood({ match }) {
     copy(link);
   }
 
-  function favoriteRecipe(event) {
-    event.preventDefault();
-    setLocalStorage(food);
-    setCanFavoriteRecipe(
-      ({ isFavoriteRecipe }) => ({ isFavoriteRecipe: !isFavoriteRecipe }),
-    );
-  }
-
-  function getMeasures(entries) {
-    const currentMeasure = entries.reduce((acc, entrie) => {
-      if (entrie[0].includes('strMeasure')
-        && entrie[1] !== null && entrie[1] !== '') {
-        acc.push(entrie[1]);
-      }
-      return acc;
-    }, []);
-    return currentMeasure;
-  }
-
   if (food) {
-    let id = 0;
+    const id = 0;
     const entries = Object.entries(food);
+    const { id: idOfParams } = match.params;
     return (
       <div>
         <img
@@ -86,42 +55,10 @@ function DetailsRecipeFood({ match }) {
         </button>
         {copyLink.isLinkCopied && <p>Link copied!</p>}
 
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          // src={ canFavoriteRecipe.isFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-          onClick={ favoriteRecipe }
-        >
-          {/* {canFavoriteRecipe.isFavoriteRecipe
-            ? (<img src={ blackHeartIcon } alt="blackHeart" />)
-            : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
-        </button>
+        <FavoriteBtn food={ food } />
 
         <p data-testid="recipe-category">{ food.strCategory }</p>
-        <ul>
-          Ingredients:
-          {entries.map((entrie) => {
-            getMeasures(entries);
-            if (entrie[0].includes('strIngredient')
-            && entrie[1] !== null && entrie[1] !== '') {
-              if (entrie[0].includes('strIngredient1')) {
-                id = 0;
-              } else {
-                id += 1;
-              }
-              const measures = getMeasures(entries);
-              return (
-                <li
-                  data-testid={ `${id}-ingredient-name-and-measure` }
-                  key={ entrie[1] }
-                >
-                  {`${entrie[1]} - ${measures[id]}`}
-                </li>
-              );
-            }
-            return '';
-          })}
-        </ul>
+        <Ul entriesOfProps={ entries } id={ id } />
 
         <p data-testid="instructions">{food.strInstructions }</p>
         <iframe
@@ -136,14 +73,7 @@ function DetailsRecipeFood({ match }) {
           allowFullScreen
         />
         <RecomendationCarousel isRecipeFood />
-        <button
-          className="button"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          Start Recipe
-        </button>
+        <StartBtn id={ idOfParams } />
 
       </div>
     );

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getDrinksById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
 import './details.css';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
 import RecomendationCarousel from '../components/RecomendationCarousel';
+import FavoriteDrinkBtn from '../components/DetailsDrinkPage/FavoriteDrinkBtn';
+import StartDrinkBtn from '../components/DetailsDrinkPage/StartDrinkBtn';
+import UlDrinks from '../components/DetailsDrinkPage/UlDrinks';
 
 const copy = require('clipboard-copy');
 
 function DetailsRecipeDrink({ match }) {
   const [drink, setDrink] = useState();
   const [copyLink, setCopyLink] = useState({ isLinkCopied: false });
-  // const [canFavoriteRecipe, setCanFavoriteRecipe] = useState({ isFavoriteRecipe: false });
 
   useEffect(() => {
     const { id } = match.params;
@@ -25,12 +25,7 @@ function DetailsRecipeDrink({ match }) {
     getDrink();
   }, []);
 
-  const history = useHistory();
   const location = useLocation();
-  function handleClick() {
-    const { id } = match.params;
-    return history.push(`/drinks/${id}/in-progress`);
-  }
 
   function handleClickShare() {
     setCopyLink({ isLinkCopied: true });
@@ -39,27 +34,10 @@ function DetailsRecipeDrink({ match }) {
     copy(link);
   }
 
-  function favoriteRecipe(event) {
-    event.preventDefault();
-    setCanFavoriteRecipe(
-      ({ isFavoriteRecipe }) => ({ isFavoriteRecipe: !isFavoriteRecipe }),
-    );
-  }
-
-  function getMeasures(entries) {
-    const currentMeasure = entries.reduce((acc, entrie) => {
-      if (entrie[0].includes('strMeasure')
-        && entrie[1] !== null && entrie[1] !== '') {
-        acc.push(entrie[1]);
-      }
-      return acc;
-    }, []);
-    return currentMeasure;
-  }
-
   if (drink) {
     const entries = Object.entries(drink);
-    let id = 0;
+    const { id: idOfParams } = match.params;
+    const id = 0;
     return (
       <div>
         <img
@@ -80,54 +58,13 @@ function DetailsRecipeDrink({ match }) {
         </button>
         {copyLink.isLinkCopied && <p>Link copied!</p>}
 
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          // src={ canFavoriteRecipe.isFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-          onClick={ favoriteRecipe }
-        >
-          {/* {canFavoriteRecipe.isFavoriteRecipe
-            ? (<img src={ blackHeartIcon } alt="blackHeart" />)
-            : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
-        </button>
+        <FavoriteDrinkBtn drink={ drink } />
 
         <p data-testid="recipe-category">{ drink.strAlcoholic }</p>
-        {/* Aqui fica os ingredientes - requisito 33 */}
-        <ul>
-          Ingredients:
-          {entries.map((entrie) => {
-            getMeasures(entries);
-            if (entrie[0].includes('strIngredient')
-            && entrie[1] !== null && entrie[1] !== '') {
-              if (entrie[0].includes('strIngredient1')) {
-                id = 0;
-              } else {
-                id += 1;
-              }
-              const measures = getMeasures(entries);
-              return (
-                <li
-                  data-testid={ `${id}-ingredient-name-and-measure` }
-                  key={ entrie[1] }
-                >
-                  {`${entrie[1]} - ${measures[id]}`}
-                </li>
-              );
-            }
-            return '';
-          })}
-        </ul>
+        <UlDrinks entriesOfProps={ entries } id={ id } />
         <p data-testid="instructions">{ drink.strInstructions }</p>
-        {/* Aqui fica o card de receitas recomendandas requisito 33 */}
         <RecomendationCarousel isRecipeFood={ false } />
-        <button
-          className="button"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          Start Recipe
-        </button>
+        <StartDrinkBtn id={ idOfParams } />
 
       </div>
     );
