@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Context from '../context/Context';
 import { filter } from '../service/fetchApi';
+import DrinkCategoryStyle from '../style/DrinkCategory';
 
 const MAX_LENGTH = 4;
 export default function DrinkCategoryFilter() {
@@ -25,10 +26,11 @@ export default function DrinkCategoryFilter() {
   const maxDrinks = drinkCategory.filter((_, index) => index <= MAX_LENGTH);
 
   return (
-    <form>
-      { maxDrinks.map(({ strCategory }, index) => (
-        <div key={ index }>
+    <DrinkCategoryStyle>
+      <div className="allBtns">
+        { maxDrinks.map(({ strCategory }, index) => (
           <button
+            key={ index }
             type="button"
             id={ `${strCategory}-category-btn` }
             value={ strCategory }
@@ -37,17 +39,17 @@ export default function DrinkCategoryFilter() {
           >
             { strCategory }
           </button>
-        </div>
-      ))}
-      <button
-        type="button"
-        id="All-category-btn"
-        value="All"
-        data-testid="All-category-filter"
-        onClick={ handleClick }
-      >
-        All
-      </button>
-    </form>
+        ))}
+        <button
+          type="button"
+          id="All-category-btn"
+          value="All"
+          data-testid="All-category-filter"
+          onClick={ handleClick }
+        >
+          All
+        </button>
+      </div>
+    </DrinkCategoryStyle>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import LoginStyle from '../style/LoginStyle';
+import logoGif from '../assets/TryFood.gif';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState({ disableButton: true });
@@ -36,13 +38,18 @@ function Login() {
   }
 
   return (
-    <form>
+    <LoginStyle>
+      <img
+        src={ logoGif }
+        alt="gif da logo"
+      />
       <input
         type="email"
         name="email"
         data-testid="email-input"
         value={ user.email }
         onChange={ handleChange }
+        placeholder="E-mail"
       />
       <input
         type="password"
@@ -51,8 +58,10 @@ function Login() {
         data-testid="password-input"
         value={ user.password }
         onChange={ handleChange }
+        placeholder="Password"
       />
       <button
+        className="example"
         type="submit"
         data-testid="login-submit-btn"
         disabled={ isDisabled.disableButton }
@@ -61,7 +70,7 @@ function Login() {
         Enter
       </button>
       { redirect.canRedirect && <Redirect to="/foods" />}
-    </form>
+    </LoginStyle>
   );
 }
 

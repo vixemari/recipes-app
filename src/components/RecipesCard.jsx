@@ -2,6 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
+import RecipesCardStyle from '../style/RecipesCardStyle';
 
 const MAX_LENGTH = 11;
 
@@ -39,19 +40,23 @@ function CardsFood() {
   }, [recipes, filtered]);
 
   return (
-    recipesForRenderState.map(({ idMeal, strMealThumb, strMeal }, index) => (
-      <Link to={ `/foods/${idMeal}` } key={ idMeal }>
-        <div data-testid={ `${index}-recipe-card` }>
-          <img
-            data-testid={ `${index}-card-img` }
-            style={ { height: '5em' } }
-            src={ strMealThumb }
-            alt={ strMeal }
-          />
-          <p data-testid={ `${index}-card-name` }>{strMeal}</p>
-        </div>
-      </Link>
-    ))
+    <RecipesCardStyle>
+      {
+        recipesForRenderState.map(({ idMeal, strMealThumb, strMeal }, index) => (
+          <Link to={ `/foods/${idMeal}` } key={ idMeal } className="imgLink">
+            <div data-testid={ `${index}-recipe-card` } className="imgDiv">
+              <img
+                className="image"
+                data-testid={ `${index}-card-img` }
+                src={ strMealThumb }
+                alt={ strMeal }
+              />
+              <p data-testid={ `${index}-card-name` }>{strMeal}</p>
+            </div>
+          </Link>
+        ))
+      }
+    </RecipesCardStyle>
   );
 }
 
