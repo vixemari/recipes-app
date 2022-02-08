@@ -4,6 +4,9 @@
   width: 30em;
 }
 
+.recomendation {
+}
+
 .wrapper_child {
   width: 600em;
 }
@@ -11,4 +14,8 @@
 .wrapper_child > .tab {
   float: left;
   padding: 40px;
+}
+
+.tab img {
+  width: 80px;
 }

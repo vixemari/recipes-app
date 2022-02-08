@@ -11,7 +11,7 @@ function StartBtn({ id }) {
 
   return (
     <button
-      className="button"
+      className="startBtn"
       type="button"
       data-testid="start-recipe-btn"
       onClick={ handleClick }

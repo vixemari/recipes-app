@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UlStyle from '../../style/Ul';
 
 function Ul({ entriesOfProps, id }) {
   function getMeasures(entries) {
@@ -14,8 +15,10 @@ function Ul({ entriesOfProps, id }) {
   }
 
   return (
-    <ul>
-      Ingredients:
+    <UlStyle>
+      <h1>
+        Ingredients:
+      </h1>
       {entriesOfProps.map((entrie) => {
         getMeasures(entriesOfProps);
         if (entrie[0].includes('strIngredient')
@@ -36,7 +39,7 @@ function Ul({ entriesOfProps, id }) {
         }
         return '';
       })}
-    </ul>
+    </UlStyle>
   );
 }
 

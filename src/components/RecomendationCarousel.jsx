@@ -35,6 +35,7 @@ function RecomendationCarousel({ isRecipeFood }) {
           <Link className="wrapper_child" to={ `/foods/${idMeal}` } key={ idMeal }>
             <div className="tab" data-testid={ `${index}-recomendation-card` }>
               <img
+                className="recomendation"
                 data-testid={ `${index}-card-img` }
                 style={ { height: '5em' } }
                 src={ strMealThumb }

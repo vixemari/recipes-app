@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { getDrinksById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
-import './details.css';
 import RecomendationCarousel from '../components/RecomendationCarousel';
 import FavoriteDrinkBtn from '../components/DetailsDrinkPage/FavoriteDrinkBtn';
 import StartDrinkBtn from '../components/DetailsDrinkPage/StartDrinkBtn';
