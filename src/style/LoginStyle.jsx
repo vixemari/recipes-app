@@ -4,7 +4,7 @@ const baseFontSize = 40;
 const diferenceValue = 4;
 const buttonColor = 'FF0000';
 
-const Form = styled.form`
+const LoginStyle = styled.form`
     display: flex;
     height: 680px;
     color: #636C5F;
@@ -26,7 +26,7 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
         // border-bottom: 4px solid black;
     }
 
-    p {
+    & p {
         font-size: ${baseFontSize / 2}px;
         margin-bottom: ${baseFontSize}px;
         // border-bottom: 1px solid black;
@@ -44,7 +44,7 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
     }
 
     input::placeholder {
-        font-size: ${baseFontSize / 2}px;
+        font-size: 24px;
         color: #644805;
     }
 
@@ -55,7 +55,7 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
         border-radius: 60px;
         width: ${baseFontSize * diferenceValue}px;
         height: 40px;
-        font-size: 20px;
+        font-size: 25px;
         transition-duration: 0.4s;
     }
 
@@ -68,4 +68,4 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
 
 `;
 
-export default Form;
+export default LoginStyle;

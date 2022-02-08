@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import profileImg from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBarHeader from './SearchBarHeader';
+import HeaderStyle from '../style/HeaderStyle';
 
 function Header({ title, btnSearch }) {
   const [redirectToProfile, setRedirectToProfile] = useState({ canRedirect: false });
@@ -18,34 +19,36 @@ function Header({ title, btnSearch }) {
   }
 
   return (
-    <div>
+    <HeaderStyle>
       <button
-        aria-label="btn-profile"
+        className="btn"
+        aria-label="btn"
         src={ profileImg }
         type="button"
         data-testid="profile-top-btn"
         onClick={ handleClickProfile }
       >
-        <img src={ profileImg } alt="profile-btn" />
+        <img className="img" src={ profileImg } alt="profile-btn" />
       </button>
 
-      <h1 data-testid="page-title">{title}</h1>
+      <h1 className="titleHeader" data-testid="page-title">{title}</h1>
       {
         btnSearch && (
           <button
+            className="btn"
             aria-label="btn-search"
             src={ searchIcon }
             type="button"
             data-testid="search-top-btn"
             onClick={ handleClickSearch }
           >
-            <img src={ searchIcon } alt="profile-btn" />
+            <img className="img" src={ searchIcon } alt="profile-btn" />
           </button>
         )
       }
       { redirectToProfile.canRedirect && <Redirect to="/profile" />}
       { openFilters.canOpenFilters && <SearchBarHeader /> }
-    </div>
+    </HeaderStyle>
   );
 }
 

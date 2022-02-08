@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Form from './css/loginStyle';
+import LoginStyle from '../style/LoginStyle';
 import logoGif from '../assets/TryFood.gif';
 
 function Login() {
@@ -38,7 +38,7 @@ function Login() {
   }
 
   return (
-    <Form>
+    <LoginStyle>
       <img
         src={ logoGif }
         alt="gif da logo"
@@ -70,7 +70,7 @@ function Login() {
         Enter
       </button>
       { redirect.canRedirect && <Redirect to="/foods" />}
-    </Form>
+    </LoginStyle>
   );
 }
 
