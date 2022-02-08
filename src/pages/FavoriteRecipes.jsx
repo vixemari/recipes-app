@@ -35,55 +35,56 @@ function FavoriteRecipes() {
       <button data-testid="filter-by-food-btn" type="button">Food</button>
       <button data-testid="filter-by-drink-btn" type="button">Drink</button>
 
-      {getFavoriteRecipes.map((recipe, index) => (
-        <div key={ recipe.id }>
-          {/* { `/foods/${recipe.id}` } */}
-          <Link
-            to={ recipe.type === 'food'
-              ? `/foods/${recipe.id}` : `/drinks/${recipe.id}` }
-          >
-            <img
-              data-testid={ `${index}-horizontal-image` }
-              width="100px"
-              src={ recipe.image }
-              alt="recipeImage"
-            />
-            <p
-              data-testid={ `${index}-${recipe.nationality}-horizontal-tag` }
+      { getFavoriteRecipes
+        && getFavoriteRecipes.map((recipe, index) => (
+          <div key={ recipe.id }>
+            {/* { `/foods/${recipe.id}` } */}
+            <Link
+              to={ recipe.type === 'food'
+                ? `/foods/${recipe.id}` : `/drinks/${recipe.id}` }
             >
-              { recipe.nationality }
-            </p>
-            <p
-              data-testid={ `${index}-${recipe.alcoholicOrNot}-horizontal-tag` }
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                width="100px"
+                src={ recipe.image }
+                alt="recipeImage"
+              />
+              <p
+                data-testid={ `${index}-${recipe.nationality}-horizontal-tag` }
+              >
+                { recipe.nationality }
+              </p>
+              <p
+                data-testid={ `${index}-${recipe.alcoholicOrNot}-horizontal-tag` }
+              >
+                { recipe.alcoholicOrNot }
+              </p>
+              <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
+            </Link>
+            <p data-testid={ `${index}-horizontal-top-text` }>{ recipe.category }</p>
+            <button
+              type="button"
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ shareIcon }
+              onClick={ () => handleClickShare(recipe) }
             >
-              { recipe.alcoholicOrNot }
-            </p>
-            <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
-          </Link>
-          <p data-testid={ `${index}-horizontal-top-text` }>{ recipe.category }</p>
-          <button
-            type="button"
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            onClick={ () => handleClickShare(recipe) }
-          >
-            <img src={ shareIcon } alt="share icon" />
-          </button>
-          {copyLink && <p>Link copied!</p>}
-          <button
-            type="button"
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            // src={ canFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
-            // onClick={ favoriteRecipe }
-          >
-            <img src={ blackHeartIcon } alt="blackHeart" />
-            {/* {canFavoriteRecipe
-              ? (<img src={ blackHeartIcon } alt="blackHeart" />)
-              : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
-          </button>
-          <hr />
-        </div>
-      ))}
+              <img src={ shareIcon } alt="share icon" />
+            </button>
+            {copyLink && <p>Link copied!</p>}
+            <button
+              type="button"
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              // src={ canFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
+              // onClick={ favoriteRecipe }
+            >
+              <img src={ blackHeartIcon } alt="blackHeart" />
+              {/* {canFavoriteRecipe
+                ? (<img src={ blackHeartIcon } alt="blackHeart" />)
+                : (<img src={ whiteHeartIcon } alt="whiteHeart" />)} */}
+            </button>
+            <hr />
+          </div>
+        ))}
     </div>
   );
 }
