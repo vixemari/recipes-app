@@ -16,7 +16,6 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    height: 100px;
 
     .buttonsHeader {
     }
