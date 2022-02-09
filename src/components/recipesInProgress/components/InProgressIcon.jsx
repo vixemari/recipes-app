@@ -8,7 +8,7 @@ export default function InProgressIcon({
     setFavorite(!favorite);
   };
   return (
-    <div>
+    <div className="divIcon">
       <button
         data-testid="favorite-btn"
         type="button"

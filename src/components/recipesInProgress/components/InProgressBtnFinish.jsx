@@ -6,7 +6,7 @@ export default function InProgressBtnFinish() {
   const history = useHistory();
 
   return (
-    <div>
+    <div className="divBtnFinish">
       <Button
         data-testid="finish-recipe-btn"
         onClick={ () => history.push('/done-recipes') }

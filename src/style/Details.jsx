@@ -30,7 +30,13 @@ const Details = styled.div`
 
     .divBtnIcon {
         display: flex;
-        justify-content: space-between;
+        position: absolute;
+        right: 20px;
+        top: 350px;
+    }
+
+    .divBtnIcon button {
+        // margin-top: 40px;
     }
 
     & p {

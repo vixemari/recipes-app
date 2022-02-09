@@ -9,6 +9,7 @@ import InProgressImg from './components/InProgressImg';
 import InProgressInstructions from './components/InProgressInstructions';
 import InProgressCheckboxIngredient from './components/InProgressCheckBoxIngredient';
 import RecipeBtnFinish from './components/InProgressBtnFinish';
+import Progress from '../../style/Progress';
 
 export default function Content() {
   const { setMealId, contentMeal, isFetch } = useContext(Context);
@@ -26,7 +27,7 @@ export default function Content() {
   }, [foodForMap, contentMeal]);
 
   return (
-    <div>
+    <Progress>
       {
         isFetch ? 'Loading...' : foodForMap.map((content) => (
           <div key={ content.strMeal }>
@@ -56,6 +57,6 @@ export default function Content() {
       <div>
         <RecipeBtnFinish />
       </div>
-    </div>
+    </Progress>
   );
 }
