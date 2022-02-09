@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export default function InProgressInstructions({ text }) {
   return (
     <div
+      className="divInst"
       data-testid="instructions"
     >
       <Card

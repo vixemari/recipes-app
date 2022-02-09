@@ -47,8 +47,8 @@ function DetailsRecipeFood({ match }) {
             width="100px"
           />
         </div>
+        <h1 className="title" data-testid="recipe-title">{ food.strMeal }</h1>
         <div className="divBtnIcon">
-          <h1 className="title" data-testid="recipe-title">{ food.strMeal }</h1>
           <button
             src={ shareIcon }
             type="button"
