@@ -14,12 +14,14 @@ export default function RecipesInProgressInstructions({ text }) {
         className="mb-2"
       >
         <Card.Header
-          style={ { fontSize: '20px', textAlign: 'center' } }
+          style={ { fontSize: '20px', textAlign: 'center', backgroundColor: '#5B4500' } }
         >
           preparation instructions
 
         </Card.Header>
-        <Card.Body>
+        <Card.Body
+          style={ { backgroundColor: '#5B4500' } }
+        >
           <Card.Text>
             { text }
           </Card.Text>

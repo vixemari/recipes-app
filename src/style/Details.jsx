@@ -40,6 +40,11 @@ const Details = styled.div`
     .inst {
         text-align: justify;
         padding: 0 8px;
+        color: white;
+        background: ${colorFont};
+        opacity: 0.8;
+        border-radius: 6px;
+        font-size: 23px;
     }
 
     .startBtn {
