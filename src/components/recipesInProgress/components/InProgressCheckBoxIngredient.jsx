@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './checkbox.css';
 
-export default function Teste({ value }) {
+export default function InProgressCheckBoxIngredient({ value }) {
   function getMeasures(entries) {
     const currentMeasure = [];
     entries.forEach((entrie) => {
@@ -13,34 +13,18 @@ export default function Teste({ value }) {
     });
     return currentMeasure;
   }
+  const MAGIC_NUMBER = -1;
 
-  let idIndex = 0;
+  let idIndex = MAGIC_NUMBER;
   const entries = Object.entries(value);
 
-  // const saveProgressIngredient = () => {
-  //   const { idMeal } = value;
-  //   // const mealId = idMeal;
-  //   console.log(idMeal);
-  //   localStorage.setItem('inProgressRecipes', {
-  //     coctails: {
-
-  //     },
-  //     meals: {
-  //       idMeal: '10',
-  //     },
-  //   });
-
-  //   console.log(localStorage.getItem('inProgressRecipes'));
-  // };
-
-  const handleClick = ({ id /* checked  */ }) => {
+  const handleClick = ({ id }) => {
     const getLabel = document.getElementById(`${id}`);
     if (getLabel.className === '') {
       getLabel.className = 'risk';
     } else {
       getLabel.className = '';
     }
-    // saveProgressIngredient();
   };
 
   return (
@@ -50,7 +34,7 @@ export default function Teste({ value }) {
         getMeasures(entries);
         if (entrie[0].includes('strIngredient')
             && entrie[1] !== null && entrie[1] !== '') {
-          if (entrie[0].includes('strIngredient1')) {
+          if (entrie[0].includes(entrie[1])) {
             idIndex = 0;
           } else {
             idIndex += 1;
@@ -60,7 +44,7 @@ export default function Teste({ value }) {
             <div key={ entrie[1] }>
               <label
                 htmlFor={ idIndex }
-                data-testid={ `${idIndex}-ingredient-name-and-measure` }
+                data-testid={ `${idIndex}-ingredient-step` }
                 id={ idIndex }
               >
                 <input
@@ -81,6 +65,6 @@ export default function Teste({ value }) {
   );
 }
 
-Teste.propTypes = {
+InProgressCheckBoxIngredient.propTypes = {
   value: PropTypes.objectOf(PropTypes.any).isRequired,
 };

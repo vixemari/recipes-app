@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-
-export default function RecipesInProgressInstructions({ text }) {
+// subindo pr 2
+export default function InProgressInstructions({ text }) {
   return (
     <div
       data-testid="instructions"
@@ -32,6 +32,6 @@ export default function RecipesInProgressInstructions({ text }) {
   );
 }
 
-RecipesInProgressInstructions.propTypes = {
+InProgressInstructions.propTypes = {
   text: PropTypes.string.isRequired,
 };
