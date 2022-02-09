@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-
+// subindo pr
 export default function InProgressInstructions({ text }) {
   return (
     <div
