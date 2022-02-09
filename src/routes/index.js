@@ -16,6 +16,7 @@ import DetailsRecipeFood from '../pages/DetailsRecipeFood';
 import DetailsRecipeDrink from '../pages/DetailsRecipeDrink';
 import FoodInProgress from '../pages/FoodInProgress';
 import DrinkInProgress from '../pages/DrinkInProgress';
+import ComponentError from '../pages/ComponentError';
 
 function Routes() {
   return (
@@ -48,6 +49,7 @@ function Routes() {
       <Route exact path="/drinks/:id" component={ DetailsRecipeDrink } />
       <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
+      <Route exact path="*" component={ ComponentError } />
     </Switch>
   );
 }
