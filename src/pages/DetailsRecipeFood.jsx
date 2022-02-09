@@ -63,14 +63,6 @@ function DetailsRecipeFood({ match }) {
         </div>
         <p className="category" data-testid="recipe-category">{ food.strCategory }</p>
         <Ul entriesOfProps={ entries } id={ id } />
-        <hr
-          style={ {
-            color: 'red',
-            backgroundColor: 'red',
-            height: 5,
-          } }
-        />
-
         <p className="inst" data-testid="instructions">{food.strInstructions }</p>
         <iframe
           className="ytVideo"

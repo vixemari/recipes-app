@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UlStyle from '../../style/Ul';
 
 function UlDrinks({ entriesOfProps, id }) {
   function getMeasures(entries) {
@@ -14,7 +15,7 @@ function UlDrinks({ entriesOfProps, id }) {
   }
 
   return (
-    <ul>
+    <UlStyle>
       Ingredients:
       {entriesOfProps.map((entrie) => {
         getMeasures(entriesOfProps);
@@ -36,7 +37,7 @@ function UlDrinks({ entriesOfProps, id }) {
         }
         return '';
       })}
-    </ul>
+    </UlStyle>
   );
 }
 

@@ -7,6 +7,7 @@ import RecomendationCarousel from '../components/RecomendationCarousel';
 import FavoriteDrinkBtn from '../components/DetailsDrinkPage/FavoriteDrinkBtn';
 import StartDrinkBtn from '../components/DetailsDrinkPage/StartDrinkBtn';
 import UlDrinks from '../components/DetailsDrinkPage/UlDrinks';
+import DetailsStyle from '../style/Details';
 
 const copy = require('clipboard-copy');
 
@@ -38,34 +39,37 @@ function DetailsRecipeDrink({ match }) {
     const { id: idOfParams } = match.params;
     const id = 0;
     return (
-      <div>
-        <img
-          src={ drink.strDrinkThumb }
-          alt="drink-Details"
-          data-testid="recipe-photo"
-          width="100px"
-        />
+      <DetailsStyle>
+        <div className="divImg">
+          <img
+            className="image"
+            src={ drink.strDrinkThumb }
+            alt="drink-Details"
+            data-testid="recipe-photo"
+            width="100px"
+          />
+        </div>
+        <div className="divBtnIcon">
+          <h1 className="title" data-testid="recipe-title">{ drink.strDrink }</h1>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ handleClickShare }
+            src={ shareIcon }
+          >
+            <img src={ shareIcon } alt="share icon" />
+          </button>
+          {copyLink.isLinkCopied && <p>Link copied!</p>}
 
-        <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
-        <button
-          type="button"
-          data-testid="share-btn"
-          onClick={ handleClickShare }
-          src={ shareIcon }
-        >
-          <img src={ shareIcon } alt="share icon" />
-        </button>
-        {copyLink.isLinkCopied && <p>Link copied!</p>}
-
-        <FavoriteDrinkBtn drink={ drink } />
-
-        <p data-testid="recipe-category">{ drink.strAlcoholic }</p>
+          <FavoriteDrinkBtn drink={ drink } />
+        </div>
+        <p className="category" data-testid="recipe-category">{ drink.strAlcoholic }</p>
         <UlDrinks entriesOfProps={ entries } id={ id } />
-        <p data-testid="instructions">{ drink.strInstructions }</p>
+        <p className="inst" data-testid="instructions">{ drink.strInstructions }</p>
         <RecomendationCarousel isRecipeFood={ false } />
         <StartDrinkBtn id={ idOfParams } />
 
-      </div>
+      </DetailsStyle>
     );
   }
   return (<p>Carregando</p>);
