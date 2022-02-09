@@ -5,9 +5,9 @@ import { getFoodById } from '../service/fetchApi';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendationCarousel from '../components/RecomendationCarousel';
 import FavoriteBtn from '../components/DetailsPage/FavoriteBtn';
-import './details.css';
 import StartBtn from '../components/DetailsPage/StartBtn';
 import Ul from '../components/DetailsPage/Ul';
+import DetailsStyle from '../style/Details';
 
 const copy = require('clipboard-copy');
 
@@ -37,31 +37,35 @@ function DetailsRecipeFood({ match }) {
     const entries = Object.entries(food);
     const { id: idOfParams } = match.params;
     return (
-      <div>
-        <img
-          src={ food.strMealThumb }
-          alt="recipeDetails"
-          data-testid="recipe-photo"
-          width="100px"
-        />
-        <h1 data-testid="recipe-title">{ food.strMeal }</h1>
-        <button
-          src={ shareIcon }
-          type="button"
-          data-testid="share-btn"
-          onClick={ handleClickShare }
-        >
-          <img src={ shareIcon } alt="share icon" />
-        </button>
-        {copyLink.isLinkCopied && <p>Link copied!</p>}
+      <DetailsStyle>
+        <div className="divImg">
+          <img
+            className="image"
+            src={ food.strMealThumb }
+            alt="recipeDetails"
+            data-testid="recipe-photo"
+            width="100px"
+          />
+        </div>
+        <div className="divBtnIcon">
+          <h1 className="title" data-testid="recipe-title">{ food.strMeal }</h1>
+          <button
+            src={ shareIcon }
+            type="button"
+            data-testid="share-btn"
+            onClick={ handleClickShare }
+          >
+            <img src={ shareIcon } alt="share icon" />
+          </button>
+          {copyLink.isLinkCopied && <p>Link copied!</p>}
 
-        <FavoriteBtn food={ food } />
-
-        <p data-testid="recipe-category">{ food.strCategory }</p>
+          <FavoriteBtn food={ food } />
+        </div>
+        <p className="category" data-testid="recipe-category">{ food.strCategory }</p>
         <Ul entriesOfProps={ entries } id={ id } />
-
-        <p data-testid="instructions">{food.strInstructions }</p>
+        <p className="inst" data-testid="instructions">{food.strInstructions }</p>
         <iframe
+          className="ytVideo"
           data-testid="video"
           width="200"
           src={ food.strYoutube.replace('watch?v=', 'embed/') }
@@ -75,7 +79,7 @@ function DetailsRecipeFood({ match }) {
         <RecomendationCarousel isRecipeFood />
         <StartBtn id={ idOfParams } />
 
-      </div>
+      </DetailsStyle>
     );
   }
   return (<p>Carregando</p>);
