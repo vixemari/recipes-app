@@ -12,6 +12,12 @@ function StartBtn({ id }) {
 
   const [ok, setOk] = React.useState(false);
   React.useEffect(() => {
+    const inProgressRecipes = {
+      meals: {
+        0: [],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     const recipeStarted = JSON.parse(localStorage.getItem('inProgressRecipes'));
     const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
     const item = (Object.keys(recipeStarted.meals));
