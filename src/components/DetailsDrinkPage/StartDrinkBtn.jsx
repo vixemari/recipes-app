@@ -11,17 +11,13 @@ function StartDrinkBtn({ id }) {
   }
   const [ok, setOk] = React.useState(false);
   React.useEffect(() => {
-    const inProgressRecipes = {
-      cocktails: {
-        0: [],
-      },
-    };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     const recipeStarted = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
-    const item = (Object.keys(recipeStarted.cocktails));
-    if (item[0] === path) {
-      setOk(true);
+    if (recipeStarted) {
+      const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+      const item = (Object.keys(recipeStarted.cocktails));
+      if (item[0] === path) {
+        setOk(true);
+      }
     }
   }, []);
 
