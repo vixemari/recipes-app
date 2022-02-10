@@ -20,6 +20,7 @@ function FavoriteRecipes() {
       link = `http://localhost:3000/foods/${recipe.id}`;
     }
     copy(link);
+    console.log(recipe);
   }
 
   useEffect(() => {
@@ -61,7 +62,15 @@ function FavoriteRecipes() {
               </p>
               <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
             </Link>
-            <p data-testid={ `${index}-horizontal-top-text` }>{ recipe.category }</p>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              { recipe.nationality }
+              {' '}
+              -
+              {' '}
+              { recipe.category }
+              { recipe.alcoholicOrNot }
+
+            </p>
             <button
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
@@ -72,6 +81,7 @@ function FavoriteRecipes() {
             </button>
             {copyLink && <p>Link copied!</p>}
             <button
+              src={ blackHeartIcon }
               type="button"
               data-testid={ `${index}-horizontal-favorite-btn` }
               // src={ canFavoriteRecipe ? blackHeartIcon : whiteHeartIcon }
