@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './checkbox.css';
+import Context from '../../../context/Context';
 
 export default function InProgressCheckBoxIngredient({ value }) {
+  const { setEnableBtn,
+    enableBtn,
+    setDisableBtn,
+  } = React.useContext(Context);
+
   function getMeasures(entries) {
     const currentMeasure = [];
     entries.forEach((entrie) => {
@@ -22,13 +28,25 @@ export default function InProgressCheckBoxIngredient({ value }) {
     const getLabel = document.getElementById(`${id}`);
     if (getLabel.className === '') {
       getLabel.className = 'risk';
+      setEnableBtn((prevState) => (prevState + 1));
     } else {
       getLabel.className = '';
+      setEnableBtn((prevState) => (prevState - 1));
     }
   };
 
+  React.useEffect(() => {
+    const qtdIngredients = getMeasures(entries);
+    if (qtdIngredients.length === enableBtn) {
+      setDisableBtn(false);
+    } else {
+      setDisableBtn(true);
+    }
+  }, [enableBtn]);
+
   return (
     <div>
+      <p>{ enableBtn }</p>
       Ingredients:
       {entries.map((entrie) => {
         getMeasures(entries);
