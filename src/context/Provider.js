@@ -10,6 +10,8 @@ function Provider({ children }) {
   const [filtered, setFiltered] = useState([]);
   const [recipesCategory, setRecipesCategory] = useState([]);
   const [drinkCategory, setDrinkCategory] = useState([]);
+  const [disableBtn, setDisableBtn] = useState(true);
+  const [enableBtn, setEnableBtn] = useState(0);
 
   const [mealId, setMealId] = useState('');
   const [contentMeal, setContentMeal] = useState([]);
@@ -36,6 +38,11 @@ function Provider({ children }) {
 
     filtered,
     setFiltered,
+
+    disableBtn,
+    setDisableBtn,
+    enableBtn,
+    setEnableBtn,
   };
 
   useEffect(() => {

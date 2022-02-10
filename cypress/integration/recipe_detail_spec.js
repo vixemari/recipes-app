@@ -217,7 +217,7 @@ describe('37 - Implemente os cards de recomendação, onde serão 6 cards, mas m
   });
 });
 
-describe.only('38 - Desenvolva um botão de nome "Start Recipe" que deve ficar fixo na parte de baixo da tela o tempo todo', () => {
+describe('38 - Desenvolva um botão de nome "Start Recipe" que deve ficar fixo na parte de baixo da tela o tempo todo', () => {
   it('Verifica posicionamento do botão na tela de detalhes de comida', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
