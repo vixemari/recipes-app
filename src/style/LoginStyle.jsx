@@ -63,7 +63,7 @@ background: linear-gradient(45deg, #FFA113 0%, #FFC160 68%, #E7BD6B 100%);
         display: block;
         border-radius: 6px;
         width: 100%;
-        height: 280px;
+        height: 250px;
     }
 
 `;
